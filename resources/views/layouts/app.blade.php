@@ -24,7 +24,11 @@
 
         {{-- Styles --}}
         <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('/css/dropzone.min.css') }}" rel="stylesheet">
         <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
+        <link href="{{ asset('/css/comment.css') }}" rel="stylesheet">
+        <link href="{{ asset('/css/gallery.css') }}" rel="stylesheet">
+        <link href="{{ asset('/css/lightbox.css') }}" rel="stylesheet">
 
         @yield('template_linked_css')
 
@@ -47,6 +51,7 @@
             ]) !!};
         </script>
 
+
         @if (Auth::User() && (Auth::User()->profile) && $theme->link != null && $theme->link != 'null')
             <link rel="stylesheet" type="text/css" href="{{ $theme->link }}">
         @endif
@@ -57,13 +62,17 @@
     <body>
         <div id="app">
 
-            @include('partials.nav')
+            @if (request()->route()->getName() !== 'login')
 
-            <div class="container">
+                @include('partials.nav')
 
-                @include('partials.form-status')
+            @endif
 
-            </div>
+            
+
+            @include('partials.form-status')
+
+    
             <div class="container">
             @yield('content')
             </div>
@@ -79,9 +88,13 @@
         @endif
 
         @yield('footer_scripts')
+        <script src="{{ asset('/js/lightbox.js') }}"></script>
+        <script src="{{ asset('/js/gallery.js') }}"></script>
+        <script src="{{ asset('/js/dropzone.min.js') }}"></script>
         <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
         <script>
             CKEDITOR.replace( 'article-ckeditor' );
         </script>
+        <script src="{{ asset('js/share.js') }}"></script>
     </body>
 </html>

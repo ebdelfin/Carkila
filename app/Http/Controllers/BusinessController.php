@@ -8,6 +8,18 @@ use Illuminate\Http\Request;
 
 class BusinessController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['show']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -89,4 +101,25 @@ class BusinessController extends Controller
     {
         //
     }
+
+    public function rate(Request $request)
+    {
+
+        $business = Business::find($request->input('business_id'));
+        $rate = $request->input('rate');
+        $user_id = auth()->user()->id;
+
+        if ($business->isRatedBy($user_id)) {
+            return redirect(route('business.show', ['business' => $business]))->with('error', 'You already rated this business!');
+        }
+        
+        $business->getRatingBuilder()
+                 ->user($user_id) // you may also use $user->id
+                 ->uniqueRatingForUsers(true) // update if already rated
+                 ->rate($rate);
+     
+        return redirect(route('business.show', ['business' => $business]))->with('success', 'Successfully rated.');
+
+    }
+
 }

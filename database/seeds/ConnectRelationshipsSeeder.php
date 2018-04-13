@@ -27,8 +27,8 @@ class ConnectRelationshipsSeeder extends Seeder
         * Get Available Roles.
         */
         $roleAdmin = Role::where('slug', '=', 'admin')->first();
-        $roleBusinessOwner = Role::where('slug', '=', 'business.owner')->first();
-        $roleInvestor = Role::where('slug', '=', 'investor')->first();
+        $roleVehicleOwner = Role::where('slug', '=', 'vehicle.owner')->first();
+        $roleRenter= Role::where('slug', '=', 'renter')->first();
 
 
 
@@ -46,8 +46,8 @@ class ConnectRelationshipsSeeder extends Seeder
 
         
         foreach ($postPermissions as $permission) {
-            $roleBusinessOwner->attachPermission($permission);
-            $roleInvestor->attachPermission($permission);
+            $roleVehicleOwner->attachPermission($permission);
+            $roleRenter->attachPermission($permission);
         }
      
         

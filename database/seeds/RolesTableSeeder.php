@@ -27,20 +27,20 @@ class RolesTableSeeder extends Seeder
         }
 
 
-        if (Role::where('slug', '=', 'business.owner')->first() === null) {
-            $businessRole = Role::create([
-                'name'        => 'Business Owner',
-                'slug'        => 'business.owner',
-                'description' => 'Business owner role',
+        if (Role::where('slug', '=', 'vehicle.owner')->first() === null) {
+            $vehicleOwnerRole = Role::create([
+                'name'        => 'Vehicle Owner',
+                'slug'        => 'vehicle.owner',
+                'description' => 'Vehicle owner role',
                 'level'       => 1,
             ]);
         }
 
-        if (Role::where('slug', '=', 'Investor')->first() === null) {
-            $investorRole = Role::create([
-                'name'        => 'Investor',
-                'slug'        => 'investor',
-                'description' => 'Investor role',
+        if (Role::where('slug', '=', 'Renter')->first() === null) {
+            $renterRole = Role::create([
+                'name'        => 'Renter',
+                'slug'        => 'Renter',
+                'description' => 'Renter role',
                 'level'       => 1,
             ]);
         }

@@ -42,7 +42,7 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $data = [
-            'roles' => Role::whereIn('slug', ['business.owner', 'investor'])->get(),
+            'roles' => Role::whereIn('slug', ['vehicle.owner', 'renter'])->get(),
         ];
 
         return view('auth.register')->with($data);
@@ -103,21 +103,18 @@ class RegisterController extends Controller
         }
 
 
-        if ($data["user_role"] === "Business Owner") {
+        if ($data["user_role"] === "Vehicle Owner") {
             return Validator::make($data,
                 [
-                    'user_role'             => 'required|in:Business Owner',
-                    'business_name'         => 'required',
-                    'business_nature'       => 'required',
-                    'business_address'      => 'required',
+                    'user_role'             => 'required|in:Vehicle Owner',
+                    'license_number'         => 'required',
+                    'license_expiry'       => 'required',
                     'name'                  => 'required|max:255|unique:users',
                     'first_name'            => '',
                     'last_name'             => '',
-                    'email'                 => 'required|email|max:255|unique:users',
+                    'email'                 => 'required|email|max:255|unique:users|domainos:allow',
                     'password'              => 'required|min:6|max:20|confirmed',
                     'password_confirmation' => 'required|same:password',
-                    'g-recaptcha-response'  => '',
-                    'captcha'               => 'required|min:1',
                 ],
                 [
                     'name.unique'                   => trans('auth.userNameTaken'),
@@ -129,22 +126,18 @@ class RegisterController extends Controller
                     'password.required'             => trans('auth.passwordRequired'),
                     'password.min'                  => trans('auth.PasswordMin'),
                     'password.max'                  => trans('auth.PasswordMax'),
-                    'g-recaptcha-response.required' => trans('auth.captchaRequire'),
-                    'captcha.min'                   => trans('auth.CaptchaWrong'),
                 ]
             );
         } else {
             return Validator::make($data,
             [
-                'user_role'             => 'required|in:Investor',
+                'user_role'             => 'required|in:Renter',
                 'name'                  => 'required|max:255|unique:users',
                 'first_name'            => '',
                 'last_name'             => '',
-                'email'                 => 'required|email|max:255|unique:users',
+                'email'                 => 'required|email|max:255|unique:users|domainos:allow',
                 'password'              => 'required|min:6|max:20|confirmed',
                 'password_confirmation' => 'required|same:password',
-                'g-recaptcha-response'  => '',
-                'captcha'               => 'required|min:1',
             ],
             [
                 'name.unique'                   => trans('auth.userNameTaken'),
@@ -156,8 +149,6 @@ class RegisterController extends Controller
                 'password.required'             => trans('auth.passwordRequired'),
                 'password.min'                  => trans('auth.PasswordMin'),
                 'password.max'                  => trans('auth.PasswordMax'),
-                'g-recaptcha-response.required' => trans('auth.captchaRequire'),
-                'captcha.min'                   => trans('auth.CaptchaWrong'),
             ]
         );
         }
@@ -198,7 +189,7 @@ class RegisterController extends Controller
             ]);
 
         if ($role_r->slug == "business.owner") {
-             Business::create([
+            $business = Business::create([
                 'name'                  => $data['business_name'],
                 'nature'                => $data['business_nature'],
                 'address'               => $data['business_address'],

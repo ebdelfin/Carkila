@@ -1,9 +1,25 @@
+* {
+  text-decoration: none !important;
+}
+
 #logo-img {
 	height: 35px;
 }
 
 .navbar-brand {
 	align-items: center;
+}
+
+.dropdown-menu li a{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; 
+  justify-content: space-between;
+}
+
+.dropdown-menu li a:hover {
+  color: #04a36f;
 }
 
 .hidden {
@@ -29,6 +45,18 @@
 
 .mb-3 {
 	margin-bottom: 30px;
+}
+
+.mt-1 {
+	margin-top: 10px;
+}
+
+.mt-2 {
+	margin-top: 20px;
+}
+
+.mt-3 {
+	margin-top: 30px;
 }
 
 .p-1 {
@@ -98,3 +126,103 @@
 #register-link:hover {
     background-color: #0dc60ddb;
 }
+
+
+/* Login Form */
+
+#loginForm .form-group {
+  position: relative;
+}
+#loginForm .form-group {
+  margin-top: 30px;
+}
+
+#loginForm .form-label {
+  position: absolute;
+  pointer-events:none;
+  left: 0;
+  top: 7px;
+  color: #999;
+  background-color: transparent;
+  z-index: 10;
+  -webkit-transition: font-size 150ms ease-out, -webkit-transform 150ms ease-out;
+  transition: font-size 150ms ease-out, -webkit-transform 150ms ease-out;
+  transition: transform 150ms ease-out, font-size 150ms ease-out;
+  transition: transform 150ms ease-out, font-size 150ms ease-out, -webkit-transform 150ms ease-out;
+}
+
+#loginForm .focused .form-label {
+  -webkit-transform: translateY(-125%);
+          transform: translateY(-125%);
+  font-size: .75em;
+}
+
+#loginForm .form-input {
+  position: relative;
+  padding: 12px 0px 5px 0;
+  text-indent: 5px;
+  width: 100%;
+  outline: 0;
+  border: 0;
+  -webkit-box-shadow: 0 1px 0 0 #e5e5e5;
+          box-shadow: 0 1px 0 0 #e5e5e5;
+  -webkit-transition: -webkit-box-shadow 150ms ease-out;
+  transition: -webkit-box-shadow 150ms ease-out;
+  transition: box-shadow 150ms ease-out;
+  transition: box-shadow 150ms ease-out, -webkit-box-shadow 150ms ease-out;
+}
+#loginForm .form-input:focus {
+  -webkit-box-shadow: 0 2px 0 0 blue;
+          box-shadow: 0 2px 0 0 blue;
+}
+
+#loginForm .form-input.filled {
+  -webkit-box-shadow: 0 2px 0 0 lightgreen;
+          box-shadow: 0 2px 0 0 lightgreen;
+}
+
+
+/*
+  Post
+*/
+.panel-heading .rating, .comments .rating{
+  pointer-events: none;
+}
+
+.panel-heading .rating .clear-rating, .comments .rating .clear-rating{
+  display: none !important;
+}
+
+
+.rating {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;   
+  align-items: center;
+}
+
+.rating > small {
+  margin-left: 10px !important;
+}
+
+#investment-list .fa.fa-heart,
+.panel-heading .fa.fa-heart,
+.panel-heading .fa.fa-heart-o,
+#investment-list .fa.fa-heart-o {
+  font-size: 30px;
+}
+
+
+/* 
+ Table Investment
+*/
+.table-thumbnail {
+  width: 100%;
+  height: 150px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+

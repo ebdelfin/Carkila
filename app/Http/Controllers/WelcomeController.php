@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Post;
 
 class WelcomeController extends Controller
 {
@@ -11,6 +12,7 @@ class WelcomeController extends Controller
      */
     public function welcome()
     {
-        return view('index');
+    	$posts =  Post::orderBy('created_at', 'desc')->paginate(6);
+        return view('index')->with('posts', $posts);
     }
 }

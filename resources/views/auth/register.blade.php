@@ -25,51 +25,14 @@
                             </div>
                         </div>
 
-                        <div id="businessOwnerFields">
 
-                            <div class="form-group{{ $errors->has('business_name') ? ' has-error' : '' }}">
-                                <label for="first_name" class="col-sm-4 control-label">Business Name</label>
-                                <div class="col-sm-6">
-                                    {!! Form::text('business_name', null, ['class' => 'form-control', 'placeholder' => 'Business Name', 'id' => 'business_name']) !!}
-                                    @if ($errors->has('business_name'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('business_name') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('business_nature') ? ' has-error' : '' }}">
-                                <label for="business_nature" class="col-sm-4 control-label">Business Nature</label>
-                                <div class="col-sm-6">
-                                    {!! Form::text('business_nature', null, ['class' => 'form-control', 'placeholder' => 'Business Nature', 'id' => 'business_nature']) !!}
-                                    @if ($errors->has('business_nature'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('business_nature') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                             <div class="form-group{{ $errors->has('business_address') ? ' has-error' : '' }}">
-                                <label for="business_address" class="col-sm-4 control-label">Business Address</label>
-                                <div class="col-sm-6">
-                                    {!! Form::text('business_address', null, ['class' => 'form-control', 'placeholder' => 'Business Address', 'id' => 'business_address']) !!}
-                                    @if ($errors->has('business_address'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('business_address') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
 
 
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-sm-4 control-label">Name</label>
+                            <label for="name" class="col-sm-4 control-label">Username</label>
                             <div class="col-sm-6">
-                                {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Username', 'id' => 'name', 'required', 'autofocus']) !!}
+                                {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name', 'id' => 'name', 'required', 'autofocus']) !!}
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -114,6 +77,35 @@
                             </div>
                         </div>
 
+
+
+                    <div id="businessOwnerFields">
+
+                        <div class="form-group{{ $errors->has('business_name') ? ' has-error' : '' }}">
+                            <label for="first_name" class="col-sm-4 control-label">License Number</label>
+                            <div class="col-sm-6">
+                                {!! Form::text('license_number', null, ['class' => 'form-control', 'placeholder' => '', 'id' => 'license_number']) !!}
+                                @if ($errors->has('license_number'))
+                                    <span class="help-block">
+                                            <strong>{{ $errors->first('business_name') }}</strong>
+                                        </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('business_nature') ? ' has-error' : '' }}">
+                            <label for="business_nature" class="col-sm-4 control-label">License Expiry</label>
+                            <div class="col-sm-6">
+                              {!! Form::date('license_expiry', \Carbon\Carbon::now()); !!}
+                                @if ($errors->has('license_expiry'))
+                                    <span class="help-block">
+                                            <strong>{{ $errors->first('license_expiry') }}</strong>
+                                        </span>
+                                @endif
+                            </div>
+                        </div>
+
+                    </div>
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-sm-4 control-label">Password</label>
                             <div class="col-sm-6">
@@ -147,11 +139,7 @@
                             </div>
                         </div>
 
-                        <p class="text-center margin-bottom-2">
-                            Or Use Social Logins to Register
-                        </p>
 
-                        @include('partials.socials')
 
                     {!! Form::close() !!}
 
@@ -165,7 +153,6 @@
 
 @section('footer_scripts')
 
-    <script src='https://www.google.com/recaptcha/api.js'></script>
 
 
     <script>
@@ -175,10 +162,8 @@
 
         user_role = $("#user_role").val();
 
-       
 
-
-            if (user_role == "Business Owner") {
+            if (user_role == "Vehicle Owner") {
 
                 $("#businessOwnerFields").removeClass("hidden");
 
@@ -193,7 +178,7 @@
                 user_role = $("#user_role").val();
 
                 
-                if (user_role == "Business Owner") {
+                if (user_role == "Vehicle Owner") {
 
                     $("#businessOwnerFields").removeClass("hidden");
 

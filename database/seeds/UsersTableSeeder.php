@@ -18,8 +18,8 @@ class UsersTableSeeder extends Seeder
         $faker = Faker\Factory::create();
         $profile = new Profile();
         $adminRole = Role::whereName('Admin')->first();
-        $businessOwnerRole = Role::whereName('Business Owner')->first();
-        $investorRole = Role::whereName('Investor')->first();
+        $vehicleOwnerRole = Role::whereName('Vehicle Owner')->first();
+        $renterRole = Role::whereName('Renter')->first();
 
         // Seed test admin
         $seededAdminEmail = 'admin@admin.com';
@@ -49,7 +49,7 @@ class UsersTableSeeder extends Seeder
                 'name'                           => $faker->userName,
                 'first_name'                     => $faker->firstName,
                 'last_name'                      => $faker->lastName,
-                'email'                          => 'businessowner@user.com',
+                'email'                          => 'vehicleowner@user.com',
                 'password'                       => Hash::make('password'),
                 'token'                          => str_random(64),
                 'activated'                      => true,
@@ -58,7 +58,7 @@ class UsersTableSeeder extends Seeder
             ]);
 
             $user->profile()->save(new Profile());
-            $user->attachRole($businessOwnerRole);
+            $user->attachRole($vehicleOwnerRole);
             $user->save();
 
             Business::create([
@@ -75,13 +75,13 @@ class UsersTableSeeder extends Seeder
 
 
         // Seed test user
-        $user = User::where('email', '=', 'investor@user.com')->first();
+        $user = User::where('email', '=', 'renter@user.com')->first();
         if ($user === null) {
             $user = User::create([
                 'name'                           => $faker->userName,
                 'first_name'                     => $faker->firstName,
                 'last_name'                      => $faker->lastName,
-                'email'                          => 'investor@user.com',
+                'email'                          => 'renter@user.com',
                 'password'                       => Hash::make('password'),
                 'token'                          => str_random(64),
                 'activated'                      => true,
@@ -90,7 +90,7 @@ class UsersTableSeeder extends Seeder
             ]);
 
             $user->profile()->save(new Profile());
-            $user->attachRole($investorRole);
+            $user->attachRole($renterRole);
             $user->save();
         }
 

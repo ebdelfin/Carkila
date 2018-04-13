@@ -8,7 +8,9 @@
 @section('content')
 
 	<div class="panel panel-default">
-		<div class="panel-heading"><h2>{{$business->name}}</h2></div>
+		<div class="panel-heading">
+			<h2>{{$business->name}}</h2>
+		</div>
 		<div class="panel-body">
 			<form>
 				<div class="form-group">

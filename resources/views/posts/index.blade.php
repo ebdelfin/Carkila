@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="panel panel-default">
-      <div class="panel-heading"><h1>Posts</h1></div>
+      <div class="panel-heading"><h1>Investments</h1></div>
       <div class="panel-body">
         
 
@@ -19,12 +19,22 @@
                 @foreach($posts as $post)
                     <tr>
                         <td><a href="/posts/{{$post->id}}">{{$post->title}}</a></td>
-                        <td>{{$post->user->business->name}}</td>
+                        <td>
+                          <a href="{{ route('business.show', ['business' => $post->user->business]) }}" class="no-underline">{{$post->user->business->name}}</a>
+                        </td>
                         <td>{{$post->price}}</td>
                         <td>{{$post->quantity}}</td>
                         <td>
 
-                            {{Form::submit('Buy', ['class' => 'btn btn-success'])}}
+                            <form action="{{route('cart.store')}}" method="POST">
+
+                                {{csrf_field()}}
+                                <input type="hidden" name="id" value="{{$post->id}}">
+                                <input type="hidden" name="title" value="{{$post->title}}">
+                                <input type="hidden" name="price" value="{{$post->price}}">
+                                <button type="submit" class="button button-green"><i class="fa fa-cart-plus"></i></button>
+                            </form>
+
                             {!!Form::close()!!}
                         </td>
                     </tr>

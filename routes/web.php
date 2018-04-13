@@ -13,15 +13,15 @@
 |
 */
 
-Route::resource('posts', 'PostsController');
-Route::resource('business', 'BusinessController');
-
 // Homepage Route
-Route::get('/', 'WelcomeController@welcome')->name('welcome');
+Route::get('/', 'WelcomeController@welcome')->name('home');
 
 // Authentication Routes
 Auth::routes();
 Route::get('/admin/login', 'AdminController@showAdminLoginForm');
+
+// Messaging Route
+Route::get('/messages', 'MessagesController@index')->name('message');
 
 
 // Public Routes
@@ -131,3 +131,41 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
 });
 
 Route::redirect('/php', '/phpinfo', 301);
+
+
+
+// BusinessController
+Route::resource('business', 'BusinessController');
+
+// CommentController
+Route::post('/comments/store', 'CommentController@store')->name('comments.store');
+Route::delete('/comments/{comment}', 'CommentController@destroy')->name('comments.destroy');
+
+// PostController
+Route::resource('posts', 'PostsController');
+Route::post('/posts/rate', 'PostsController@rate')->name('rate.post');
+Route::post('favorite/{post}', 'PostsController@favoritePost');
+Route::post('unfavorite/{post}', 'PostsController@unFavoritePost');
+
+Route::get('/posts/{post}/gallery', 'PostsController@galleryIndex')->name('posts.gallery.index');
+Route::post('/posts/uploadImages', 'PostsController@galleryUpload')->name('posts.gallery.upload');
+
+
+
+// CartController
+Route::resource('cart', 'CartController');
+
+
+//MessagesController
+Route::group(['prefix' => 'messages'], function () {
+    Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
+    Route::get('create/{user}/{investment}', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
+    Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+    Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
+    Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
+});
+
+//UserController Investor
+Route::get('favorites', 'UserController@myFavorites')->middleware('auth')->name('investor.favorites');
+
+

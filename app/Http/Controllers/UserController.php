@@ -28,18 +28,36 @@ class UserController extends Controller
     {
 
         $user = Auth::user();
-        $business = User::find($user->id)->business;
-
         if ($user->isAdmin()) {
             return view('pages.admin.dashboard');
         } if ($user->hasRole('business.owner')) {
-            //return $business;
-            return view('pages.businessowner.dashboard',compact('business'))->with('posts',$user->posts);
-            //return view('pages.businessowner.dashboard') ->with('posts',$user->posts,'business',$business);
+
+            $business = User::find($user->id)->business;
+            $posts = Post::where('user_id', $user->id)->paginate(5);
+
+            return view('pages.businessowner.dashboard') ->with('posts',$posts,'business',$business);
+        
+
         } else {
             return view('pages.investor.dashboard');
         }
         
 
     }
+
+    public function myFavorites() { 
+
+        $data = [
+            'myFavorites' => Auth::user()->favorites,
+        ];
+
+        if (Auth::user()->hasRole('investor')) {
+            return view('pages.investor.my_favorites')->with($data);
+        } else {
+            return back()->with('error', 'Unauthorized Access');
+        }
+        
+    }
+
+
 }
