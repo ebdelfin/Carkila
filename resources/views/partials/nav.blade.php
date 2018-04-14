@@ -12,8 +12,8 @@
 
             {{-- Branding Image --}}
             <a class="navbar-brand d-flex" href="{{ url('/') }}">
-                <img src="{{ asset('favicon.ico') }}" / id="logo-img">
-                ondo
+                <img src="{{ asset('logo.png') }}" / id="logo-img">
+               <!-- ondo-->
 
             </a>
 

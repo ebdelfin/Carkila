@@ -89,7 +89,7 @@ class VehicleController extends Controller
 
         $vehicle->save();
 
-        return redirect()->route('home')->with('success', 'Post Created');
+        return redirect()->route('home')->with('success', 'Vehicle listing published!');
     }
 
     /**

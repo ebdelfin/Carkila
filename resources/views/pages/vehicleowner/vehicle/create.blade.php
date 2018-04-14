@@ -4,7 +4,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h1>Create Vehicle Post</h1>
+            <h1>Add Vehicle Listing</h1>
         </div>
         <div class="panel-body">
 
@@ -62,7 +62,7 @@
 
                 <div class="form-group">
                     {{Form::label('engine_number', 'Engine Number')}}
-                    {{Form::text ('engine_number', '', ['class'=>'form-control', 'placeholder'=> 'Number'])}}
+                    {{Form::text ('engine_number', '', ['class'=>'form-control', 'placeholder'=> 'Engine Number'])}}
                     @if ($errors->has('engine_number'))
                         <span class="text-danger">
                                                 <strong>{{ $errors->first('engine_number') }}</strong>
@@ -73,7 +73,7 @@
 
                 <div class="form-group">
                     {{Form::label('chassis_number', 'Chassis Number')}}
-                    {{Form::text ('chassis_number', '', ['class'=>'form-control', 'placeholder'=> 'Number'])}}
+                    {{Form::text ('chassis_number', '', ['class'=>'form-control', 'placeholder'=> 'Chassis Number'])}}
                     @if ($errors->has('chassis_number'))
                         <span class="text-danger">
                                                     <strong>{{ $errors->first('chassis_number') }}</strong>
@@ -83,7 +83,7 @@
 
                 <div class="form-group">
                     {{Form::label('plate_number', 'Plate Number')}}
-                    {{Form::text ('plate_number', '', ['class'=>'form-control', 'placeholder'=> 'Number'])}}
+                    {{Form::text ('plate_number', '', ['class'=>'form-control', 'placeholder'=> 'Plate Number'])}}
                     @if ($errors->has('plate_number'))
                         <span class="text-danger">
                                                         <strong>{{ $errors->first('plate_number') }}</strong>
@@ -124,7 +124,7 @@
                 </div>
 
 
-                {{Form::submit('Create Invesment', ['class'=>'btn btn-primary mt-2'])}}
+                {{Form::submit('Publish Listing', ['class'=>'btn btn-primary mt-2'])}}
             {!! Form::close() !!}
 
         </div>
