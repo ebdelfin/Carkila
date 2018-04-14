@@ -19,11 +19,11 @@ class CreateVehiclesTable extends Migration
             $table->string('model');
             $table->year('year');
             $table->string('color');
-            $table->integer('seatingCapacity');
-            $table->string('engineNumber');
-            $table->string('chassisNumber');
-            $table->string('plateNumber');
-            $table->double('rentalRate');
+            $table->integer('seating_capacity');
+            $table->string('engine_number');
+            $table->string('chassis_number');
+            $table->string('plate_number');
+            $table->double('rental_rate');
             $table->integer('user_id');
             $table->timestamps();
         });
