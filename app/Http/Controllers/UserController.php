@@ -30,9 +30,9 @@ class UserController extends Controller
         $user = Auth::user();
         if ($user->isAdmin()) {
             return view('pages.admin.dashboard');
-        } if ($user->hasRole('business.owner')) {
+        } if ($user->hasRole('vehicle.owner')) {
 
-            $business = User::find($user->id)->business;
+            $business = User::find($user->id)->vehicle;
             $posts = Post::where('user_id', $user->id)->paginate(5);
 
             return view('pages.businessowner.dashboard') ->with('posts',$posts,'business',$business);

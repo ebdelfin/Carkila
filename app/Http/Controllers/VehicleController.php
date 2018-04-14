@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Vehicle;
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Image;
+use File;
+use Auth;
+use Mail;
 
 class VehicleController extends Controller
 {
@@ -12,6 +16,11 @@ class VehicleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' =>['index','show']]);
+    }
+
     public function index()
     {
         //
@@ -24,7 +33,7 @@ class VehicleController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.vehicleowner.vehicle.create');
     }
 
     /**
@@ -35,7 +44,52 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+
+            'make' => 'required',
+            'model' => 'required',
+            'year' => 'required',
+            'color' => 'required',
+            'seating_capacity' => 'required|numeric',
+            'engine_number'=> 'required',
+            'chassis_number'=> 'required',
+            'plate_number'=> 'required',
+            'rental_rate' => 'required|numeric',
+        ]);
+
+        $vehicle = new Vehicle;
+        $vehicle->make = $request->input('make');
+        $vehicle->model = $request->input('model');
+        $vehicle->year = $request->input('year');
+        $vehicle->color = $request->input('color');
+        $vehicle->seating_capacity = $request->input('seating_capacity');
+        $vehicle->engine_number = $request->input('engine_number');
+        $vehicle->chassis_number = $request->input('chassis_number');
+        $vehicle->plate_number = $request->input('plate_number');
+        $vehicle->rental_rate = $request->input('rental_rate');
+
+        $vehicle->user_id = auth()->user()->id;
+
+        if ($request->hasFile('featured_image')) {
+            $image  = $request->file('featured_image');
+            $file_name =  time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path() . '/images/users/id/' . $vehicle->user_id . '/uploads/posts/';
+
+            // Make the user a folder and set permissions
+
+            if (!file_exists($location)) {
+                mkdir($location, 666, true);
+            }
+
+
+            Image::make($image)->save($location.$file_name);
+
+            $vehicle->image = '/images/users/id/' . $vehicle->user_id . '/uploads/posts/'. $file_name;
+        }
+
+        $vehicle->save();
+
+        return redirect()->route('home')->with('success', 'Post Created');
     }
 
     /**

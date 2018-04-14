@@ -24,6 +24,7 @@ class CreateVehiclesTable extends Migration
             $table->string('chassis_number');
             $table->string('plate_number');
             $table->double('rental_rate');
+            $table->string('image')->nullable();
             $table->integer('user_id');
             $table->timestamps();
         });

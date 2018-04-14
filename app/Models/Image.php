@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
-    protected $fillable = ['post_id' , 'image'];
+    protected $fillable = ['vehicle_id' , 'image'];
 
-    public function post() {
-    	return $this->belongsTo('App\Models\Post');
+    public function vehicle() {
+        return $this->belongsTo('App\Models\Vehicle');
     }
 }

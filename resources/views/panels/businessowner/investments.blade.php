@@ -1,8 +1,8 @@
 <div class="panel panel-default p-1">
                     
                     <div class="panel-heading">
-                        <h2>Investments</h2>
-                        <a href="{{ route('posts.create') }}" class="btn btn-primary">Create Invesment</a>
+                        <h2>Vehicles</h2>
+                        <a href="{{ route('vehicle.create') }}" class="btn btn-primary">Create Vehicle Listing</a>
                     </div>
                    
                     <div class="panel-body">
@@ -44,7 +44,7 @@
                             </div>
 
                         @else
-                            <p>You have no posts</p>
+                            <p>You have no vehicles</p>
                         @endif
 
                     </div>

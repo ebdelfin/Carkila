@@ -142,7 +142,7 @@ Route::post('/comments/store', 'CommentController@store')->name('comments.store'
 Route::delete('/comments/{comment}', 'CommentController@destroy')->name('comments.destroy');
 
 //Vehicle controller
-Route::resource('vehicles','VehicleController');
+Route::resource('vehicle','VehicleController');
 
 
 // PostController

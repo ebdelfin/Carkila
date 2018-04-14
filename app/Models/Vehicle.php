@@ -29,4 +29,8 @@ class Vehicle extends Model
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
+
+    public function image(){
+        return $this->belongsTo('App\Models\Image');
+    }
 }
