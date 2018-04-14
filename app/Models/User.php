@@ -122,9 +122,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Post');
     }
 
-    public function business()
+    public function owner()
     {
-        return $this->hasOne('App\Models\Business');
+        return $this->hasOne('App\Models\Owner');
     }
 
     public function favorites()

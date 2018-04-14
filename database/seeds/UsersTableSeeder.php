@@ -2,7 +2,7 @@
 
 use App\Models\Profile;
 use App\Models\User;
-use App\Models\Business;
+use App\Models\Owner;
 use Illuminate\Database\Seeder;
 use jeremykenedy\LaravelRoles\Models\Role;
 
@@ -43,7 +43,7 @@ class UsersTableSeeder extends Seeder
         }
 
         // Seed test user
-        $user = User::where('email', '=', 'businessowner@user.com')->first();
+        $user = User::where('email', '=', 'vehicleowner@user.com')->first();
         if ($user === null) {
             $user = User::create([
                 'name'                           => $faker->userName,
@@ -61,10 +61,9 @@ class UsersTableSeeder extends Seeder
             $user->attachRole($vehicleOwnerRole);
             $user->save();
 
-            Business::create([
-                'name'                           => 'businessName',
-                'nature'                         => 'businessNature',
-                'address'                        => 'businessAddress',
+            Owner::create([
+                'license_number'                           => '123456789',
+                'license_expiry'                         => '2018-04-14',
                 'user_id'                         => $user->id,
             ]);
 

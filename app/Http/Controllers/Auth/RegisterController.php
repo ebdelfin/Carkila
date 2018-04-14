@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\Business;
+use App\Models\Owner;
 use App\Traits\ActivationTrait;
 use App\Traits\CaptchaTrait;
 use App\Traits\CaptureIpTrait;
@@ -188,11 +188,10 @@ class RegisterController extends Controller
                 'activated'         => !config('settings.activation'),
             ]);
 
-        if ($role_r->slug == "business.owner") {
-            $business = Business::create([
-                'name'                  => $data['business_name'],
-                'nature'                => $data['business_nature'],
-                'address'               => $data['business_address'],
+        if ($role_r->slug == "vehicle.owner") {
+            $owner = Owner::create([
+                'license_number'                  => $data['license_number'],
+                'license_expiry'                => $data['license_expiry'],
                 'user_id'               => $user->id,
             ]);
         } 
