@@ -141,6 +141,10 @@ Route::resource('business', 'BusinessController');
 Route::post('/comments/store', 'CommentController@store')->name('comments.store');
 Route::delete('/comments/{comment}', 'CommentController@destroy')->name('comments.destroy');
 
+//Vehicle controller
+Route::resource('vehicles','VehicleController');
+
+
 // PostController
 Route::resource('posts', 'PostsController');
 Route::post('/posts/rate', 'PostsController@rate')->name('rate.post');
