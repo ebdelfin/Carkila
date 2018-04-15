@@ -23,7 +23,8 @@ class VehicleController extends Controller
 
     public function index()
     {
-        //
+        $vehicles = Vehicle::all();
+        return view('pages.vehicleowner.vehicle.index')->with('vehicles', $vehicles);
     }
 
     /**
@@ -33,6 +34,8 @@ class VehicleController extends Controller
      */
     public function create()
     {
+
+
         return view('pages.vehicleowner.vehicle.create');
     }
 
@@ -73,7 +76,7 @@ class VehicleController extends Controller
         if ($request->hasFile('featured_image')) {
             $image  = $request->file('featured_image');
             $file_name =  time() . '.' . $image->getClientOriginalExtension();
-            $location = public_path() . '/images/users/id/' . $vehicle->user_id . '/uploads/posts/';
+            $location = public_path() . '/images/users/id/' . $vehicle->user_id . '/uploads/vehicles/';
 
             // Make the user a folder and set permissions
 
@@ -84,7 +87,7 @@ class VehicleController extends Controller
 
             Image::make($image)->save($location.$file_name);
 
-            $vehicle->image = '/images/users/id/' . $vehicle->user_id . '/uploads/posts/'. $file_name;
+            $vehicle->image = '/images/users/id/' . $vehicle->user_id . '/uploads/vehicles/'. $file_name;
         }
 
         $vehicle->save();
@@ -98,9 +101,10 @@ class VehicleController extends Controller
      * @param  \App\Vehicle  $vehicle
      * @return \Illuminate\Http\Response
      */
-    public function show(Vehicle $vehicle)
+    public function show($id)
     {
-        //
+        $vehicle = Vehicle::find($id);
+        return view('pages.vehicleowner.vehicle.show')->with('vehicle',$vehicle);
     }
 
     /**
@@ -109,9 +113,11 @@ class VehicleController extends Controller
      * @param  \App\Vehicle  $vehicle
      * @return \Illuminate\Http\Response
      */
-    public function edit(Vehicle $vehicle)
+    public function edit($id)
     {
-        //
+        $vehicle = Vehicle::find($id);
+
+        return view('pages.vehicleowner.vehicle.edit')->with('vehicle',$vehicle);
     }
 
     /**
@@ -121,9 +127,61 @@ class VehicleController extends Controller
      * @param  \App\Vehicle  $vehicle
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Vehicle $vehicle)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+
+            'make' => 'required',
+            'model' => 'required',
+            'year' => 'required',
+            'color' => 'required',
+            'seating_capacity' => 'required|numeric',
+            'engine_number'=> 'required',
+            'chassis_number'=> 'required',
+            'plate_number'=> 'required',
+            'rental_rate' => 'required|numeric',
+        ]);
+
+        $vehicle = Vehicle::find($id);
+        $vehicle->make = $request->input('make');
+        $vehicle->model = $request->input('model');
+        $vehicle->year = $request->input('year');
+        $vehicle->color = $request->input('color');
+        $vehicle->seating_capacity = $request->input('seating_capacity');
+        $vehicle->engine_number = $request->input('engine_number');
+        $vehicle->chassis_number = $request->input('chassis_number');
+        $vehicle->plate_number = $request->input('plate_number');
+        $vehicle->rental_rate = $request->input('rental_rate');
+
+        if ($request->featured_image) {
+            // add new featured image
+            $image  = $request->file('featured_image');
+            $file_name =  time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path() . '/images/users/id/' . $vehicle->user_id . '/uploads/vehicles/';
+
+            // Make the user a folder if nonexistent and set permissions
+            if (!file_exists($location)) {
+                mkdir($location, 666, true);
+            }
+
+            Image::make($image)->save($location.$file_name);
+
+            if ( !empty($vehicle->image)) {
+                // delete the old image from directory
+                $oldFileName =  public_path() . $vehicle->image;
+                File::delete($oldFileName);
+            }
+
+
+            // update the database
+            $vehicle->image = '/images/users/id/' . $vehicle->user_id . '/uploads/vehicles/'. $file_name;
+
+
+        }
+
+        $vehicle->save();
+
+        return redirect()->route('home')->with('success', 'Vehicle listing Updated !');
     }
 
     /**
