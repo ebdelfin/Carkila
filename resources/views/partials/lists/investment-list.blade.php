@@ -26,7 +26,8 @@
                                 </div>
                                 <p>Model: {{$post->model}}</p>
                                 <p>Rental Rate: {{$post->rental_rate}}</p>
-                                <p>Address: {{$address}}</p>
+                                <p>Address: {{DB::table('users')->select('address')->where('id', '=', (DB::table('vehicles')->select('user_id')->where('id', '=', $post->id))->implode('user_id'))->get()->implode('address')}}</p>
+                                <p>City: {{DB::table('users')->select('city')->where('id', '=', (DB::table('vehicles')->select('user_id')->where('id', '=', $post->id))->implode('user_id'))->get()->implode('city')}}</p>
                             </div>
                         </a>
 

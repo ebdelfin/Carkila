@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="form-group">
-                    {{Form::label('year', 'Model')}}
+                    {{Form::label('year', 'Year')}}
                     {{Form::text ('year', '', ['class'=>'form-control', 'placeholder'=> 'year'])}}
                     @if ($errors->has('year'))
                         <span class="text-danger">

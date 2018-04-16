@@ -19,12 +19,13 @@ class WelcomeController extends Controller
         //$vehicle = Vehicle::find($id);
         $address = DB::table('users')->select('address')->where('id', '=', (DB::table('vehicles')->select('user_id')->where('id', '=', 1))->implode('user_id'))->get()->implode('address');
         //$collection->push([$post->id,$address]);
+        //$phone = User::where('id','1')->with('id')->get();
         $collection = collect([]);
         foreach ($posts as $post) {
             $address = DB::table('users')->select('address')->where('id', '=', (DB::table('vehicles')->select('user_id')->where('id', '=', $post->id))->implode('user_id'))->get()->implode('address');
             $collection->push([$post->id =>$address]);
         }
-        return $collection;
+        //return $collection;
         return view('index')->with('posts', $posts)->with('collection',$collection);
     }
 }
