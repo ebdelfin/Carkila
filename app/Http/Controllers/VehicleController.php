@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Image;
 use File;
 use Auth;
@@ -34,8 +36,6 @@ class VehicleController extends Controller
      */
     public function create()
     {
-
-
         return view('pages.vehicleowner.vehicle.create');
     }
 
@@ -104,7 +104,8 @@ class VehicleController extends Controller
     public function show($id)
     {
         $vehicle = Vehicle::find($id);
-        return view('pages.vehicleowner.vehicle.show')->with('vehicle',$vehicle);
+        $address = DB::table('users')->select('address')->where('id','=',(DB::table('vehicles')->select('user_id')->where('id','=',$id))->implode('user_id'))->get()->implode('address');
+        return view('pages.vehicleowner.vehicle.show')->with('vehicle',$vehicle)->with('address',$address);
     }
 
     /**

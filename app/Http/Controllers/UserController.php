@@ -25,10 +25,14 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index()
     {
 
         $user = Auth::user();
+
+        $posts =  Vehicle::orderBy('created_at', 'desc')->paginate(6);
         if ($user->isAdmin()) {
             return view('pages.admin.dashboard');
         } if ($user->hasRole('vehicle.owner')) {
@@ -40,7 +44,8 @@ class UserController extends Controller
         
 
         } else {
-            return view('pages.investor.dashboard');
+            //return view('pages.investor.dashboard');
+            return view('index')->with('posts', $posts);
         }
         
 

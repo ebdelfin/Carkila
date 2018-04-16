@@ -65,6 +65,63 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
+                            <label for="email" class="col-sm-4 control-label">Gender</label>
+                            <div class="col-sm-6">
+                                {!! Form::select('gender', ['Male' => 'Male', 'Female' => 'Female'], null, ['class' => 'form-control','placeholder' => 'Choose gender']); !!}
+                                @if ($errors->has('gender'))
+                                    <span class="help-block">
+                                            <strong>{{ $errors->first('gender') }}</strong>
+                                        </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                            <label for="last_name" class="col-sm-4 control-label">Address</label>
+                            <div class="col-sm-6">
+                                {!! Form::text('address', null, ['class' => 'form-control', 'placeholder' => 'Address', 'id' => 'address']) !!}
+                                @if ($errors->has('address'))
+                                    <span class="help-block">
+                                            <strong>{{ $errors->first('address') }}</strong>
+                                        </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                            <label for="last_name" class="col-sm-4 control-label">City</label>
+                            <div class="col-sm-6">
+                                {!! Form::text('city', null, ['class' => 'form-control', 'placeholder' => 'City', 'id' => 'city']) !!}
+                                @if ($errors->has('city'))
+                                    <span class="help-block">
+                                                <strong>{{ $errors->first('city') }}</strong>
+                                            </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('birth_date') ? ' has-error' : '' }}">
+                            <label for="business_nature" class="col-sm-4 control-label">Birth date</label>
+                            <div class="col-sm-6">
+                                {!! Form::date('birth_date', \Carbon\Carbon::now()); !!}
+                                @if ($errors->has('birth_date'))
+                                    <span class="help-block">
+                                                <strong>{{ $errors->first('birth_date') }}</strong>
+                                            </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('mobile_number') ? ' has-error' : '' }}">
+                            <label for="last_name" class="col-sm-4 control-label">Mobile Number</label>
+                            <div class="col-sm-6">
+                                {!! Form::text('mobile_number', null, ['class' => 'form-control', 'placeholder' => 'Mobile Number', 'id' => 'mobile_number']) !!}
+                                @if ($errors->has('mobile_number'))
+                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('mobile_number') }}</strong>
+                                                </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-sm-4 control-label">E-Mail Address</label>
                             <div class="col-sm-6">
@@ -76,6 +133,7 @@
                                 @endif
                             </div>
                         </div>
+
 
 
 

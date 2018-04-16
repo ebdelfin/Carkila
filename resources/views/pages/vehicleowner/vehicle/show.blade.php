@@ -51,6 +51,7 @@
                 <h3>{{$vehicle->make}} {{$vehicle->model}} {{$vehicle->year}}</h3>
                 <h3>Capacity: {{$vehicle->seating_capacity}}</h3>
                 <h1>Rental Rate: {{$vehicle->rental_rate}}</h1>
+                <h3>Address: {{$address}}</h3>
 
 
 
