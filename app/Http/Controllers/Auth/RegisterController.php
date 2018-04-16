@@ -116,7 +116,7 @@ class RegisterController extends Controller
                     'address'             => 'required',
                     'city'             => 'required',
                     'birth_date'             => 'required',
-                    'email'                 => 'required|email|max:255|unique:users|domainos:allow',
+                    'email'                 => 'required|email|max:255|unique:users',
                     'password'              => 'required|min:6|max:20|confirmed',
                     'password_confirmation' => 'required|same:password',
                 ],
