@@ -194,4 +194,56 @@ class VehicleController extends Controller
     {
         //
     }
+
+    public function galleryIndex(Post $post) {
+        return view('posts.gallery')->with('post', $post);
+    }
+
+    public function galleryUpload(Request $request) {
+
+        $post_id = $request->input('post_id');
+        $post = Vehicle::find($post_id);
+
+        // get file from the post request
+        $image = $request->file('file');
+
+        // set file name
+        $file_name = uniqid() . '.' . $image->getClientOriginalExtension();
+
+
+
+        $location = public_path() . '/images/users/id/' . $post->user_id . '/uploads/vehicles/gallery/';
+
+        // Make the user a folder if nonexistent and set permissions
+        if (!file_exists($location)) {
+            mkdir($location, 666, true);
+        }
+
+        Image::make($image)->save($location.$file_name);
+
+        // save tinto he database
+        $file_path = '/images/users/id/' . $post->user_id . '/uploads/vehicles/gallery/'. $file_name;
+
+        $image = $post->images()->create([
+            'post_id'   => $post_id,
+            'image'     => $file_path,
+        ]);
+
+        return $image;
+
+    }
+
+
+    public function galleryDelete($id)
+    {
+        $image = GalleryImage::find($id);
+
+        // Delete Image from directory
+        unlink(public_path($image->image));
+
+        // Delete image from database
+        $image->delete();
+
+        return back();
+    }
 }

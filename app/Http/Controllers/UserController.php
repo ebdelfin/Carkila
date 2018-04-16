@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Vehicle;
 use Auth;
 use App\Models\User;
 use App\Models\Post;
@@ -33,7 +34,7 @@ class UserController extends Controller
         } if ($user->hasRole('vehicle.owner')) {
 
             $business = User::find($user->id)->vehicle;
-            $posts = Post::where('user_id', $user->id)->paginate(5);
+            $posts = Vehicle::where('user_id', $user->id)->paginate(5);
 
             return view('pages.businessowner.dashboard') ->with('posts',$posts,'business',$business);
         

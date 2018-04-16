@@ -33,7 +33,7 @@
                                             {{Form::hidden('_method', 'DELETE')}}
                                             {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                                             {!!Form::close()!!}
-                                            <a href=" {{ route('posts.show', ['post' => $post]) }} " class="btn btn-default">View</a>
+                                            <a href=" {{ route('vehicles.show', ['post' => $post]) }} " class="btn btn-default">View</a>
                                         </td>
                                     </tr>
                                 @endforeach

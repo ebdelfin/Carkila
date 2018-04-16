@@ -155,6 +155,11 @@ Route::get('/posts/{post}/gallery', 'PostsController@galleryIndex')->name('posts
 Route::post('/posts/uploadImages', 'PostsController@galleryUpload')->name('posts.gallery.upload');
 
 
+//vehicles
+
+Route::resource('vehicles', 'VehicleController');
+Route::post('/posts/uploadImages', 'PostsController@galleryUpload')->name('posts.gallery.upload');
+
 
 // CartController
 Route::resource('cart', 'CartController');
