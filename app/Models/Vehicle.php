@@ -33,4 +33,9 @@ class Vehicle extends Model
     public function image(){
         return $this->belongsTo('App\Models\Image');
     }
+
+    public function bookings()
+    {
+        return $this->hasMany('App\Models\Booking');
+    }
 }

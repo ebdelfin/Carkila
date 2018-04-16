@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Vehicle;
 use Auth;
 use App\Models\User;
-use App\Models\Post;
+use App\Models\Booking;
 use App\Models\Business;
 
 class UserController extends Controller
@@ -44,8 +44,9 @@ class UserController extends Controller
         
 
         } else {
-            //return view('pages.investor.dashboard');
-            return view('index')->with('posts', $posts);
+            $bookings = Booking::where('user_id',value(auth()->user()->id))->paginate(10);
+            return view('pages.investor.dashboard')->with('bookings',$bookings);
+            //return view('index')->with('posts', $posts);
         }
         
 

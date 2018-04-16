@@ -12,8 +12,8 @@
  
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-            	<h1>Investor Page</h1>
-                @include('panels.welcome-panel')
+            	<h1>Renter's Page</h1>
+                @include('pages.renter.bookings')
 
             </div>
         </div>

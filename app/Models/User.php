@@ -136,4 +136,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Post::class, 'favorites', 'user_id', 'post_id')->withTimeStamps();
     }
+
+    public function bookings()
+    {
+        return $this->hasMany('App\Models\Booking');
+    }
 }

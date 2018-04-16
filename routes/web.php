@@ -156,11 +156,12 @@ Route::post('/posts/uploadImages', 'PostsController@galleryUpload')->name('posts
 
 
 //vehicles
-
 Route::resource('vehicles', 'VehicleController');
 Route::post('/posts/uploadImages', 'PostsController@galleryUpload')->name('posts.gallery.upload');
 
-
+//bookings
+Route::resource('booking', 'BookingController');
+Route::get('/booking/create_request/{owner_id}/{vehicle}', 'BookingController@create_request')->name('booking.create_request');
 // CartController
 Route::resource('cart', 'CartController');
 

@@ -73,12 +73,20 @@
             @if (Auth::check())
                 @if(Auth::user()->hasRole('renter'))
 
-                    <div class="d-flex" style="justify-content: flex-end;">
-                        <a href="{{ route('messages.create', ['user' => $vehicle->user, 'vehicle' => $vehicle])  }}" class="btn btn-info">
-                            Message Business Owner
-                            <i aria-hidden="true" class="fa fa-envelope"></i>
+
+                    <div class="container">
+                        <a href="{{ route('booking.create_request', ['owner_id' => $vehicle->user_id, 'vehicle' => $vehicle->id])  }}" class="btn btn-primary">
+                            Book this vehicle now!
                         </a>
                     </div>
+                <p></p>
+                        <div class="container">
+                                <a href="{{ route('messages.create', ['user' => $vehicle->user, 'vehicle' => $vehicle])  }}" class="btn btn-twitch">
+                                    Message Business Owner
+                                    <i aria-hidden="true" class="fa fa-envelope"></i>
+                                </a>
+                        </div>
+
 
                 @endif
             @endif
