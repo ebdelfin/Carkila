@@ -191,9 +191,15 @@ class VehicleController extends Controller
      * @param  \App\Vehicle  $vehicle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Vehicle $vehicle)
+    public function destroy($id)
     {
-        //
+        $post = Vehicle::find($id);
+
+        if(auth()->user()->id !==$post->user_id){
+            return redirect()->route('home')->with('error', 'Unauthorized Page');
+        }
+        $post->delete();
+        return redirect()->route('home')->with('success', 'Post Removed');
     }
 
     public function galleryIndex(Post $post) {
