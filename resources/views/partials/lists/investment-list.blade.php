@@ -1,4 +1,4 @@
-<h3 class="page-header">Investments</h3>
+<h3 class="page-header">Vehicle Listings</h3>
 
 <div id="investment-list" class="row">
             @forelse ($posts as $post)

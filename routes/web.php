@@ -162,6 +162,7 @@ Route::post('/posts/uploadImages', 'PostsController@galleryUpload')->name('posts
 //bookings
 Route::resource('booking', 'BookingController');
 Route::get('/booking/create_request/{owner_id}/{vehicle}', 'BookingController@create_request')->name('booking.create_request');
+Route::get('/booking/{vehicle}', 'BookingController@show_request')->name('booking.show_request');
 // CartController
 Route::resource('cart', 'CartController');
 

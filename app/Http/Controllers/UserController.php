@@ -38,9 +38,9 @@ class UserController extends Controller
         } if ($user->hasRole('vehicle.owner')) {
 
             $business = User::find($user->id)->vehicle;
-            $posts = Vehicle::where('user_id', $user->id)->paginate(5);
+            $vehicles = Vehicle::where('user_id', $user->id)->paginate(5);
 
-            return view('pages.businessowner.dashboard') ->with('posts',$posts,'business',$business);
+            return view('pages.businessowner.dashboard') ->with('vehicles',$vehicles,'business',$business);
         
 
         } else {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use DB;
 
 class BookingController extends Controller
 {
@@ -88,9 +89,11 @@ class BookingController extends Controller
      * @param  \App\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function show(Booking $booking)
+    public function show($id)
     {
-        //
+        $requests = Booking::where('vehicle_id','=',$id)->first();
+        //return var_dump($requests);
+        return view ('pages.renter.bookings.show')->with('requests',$requests);
     }
 
     /**
