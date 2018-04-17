@@ -43,10 +43,18 @@
                 @else
 
                     
-                    @if (Auth::User()->hasRole('investor'))
-                        <li><a href="{{ route('cart.index') }}"><i class="fa fa-shopping-cart" style="font-size: 27px;"></i></a></li>
+                    @if (Auth::User()->hasRole('renter'))
+                        <li><a href="{{ url('/') }}"><i class="fa fa-search"></i> Browse Vehicles</a></li>
+                        <li><a href="{{ url('/dashboard') }}"><i class="fa fa-car"></i> Bookings</a></li>
                     @endif
 
+                    @if (Auth::User()->hasRole('vehicle.owner'))
+                        <li><a href="{{ url('/dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                    @endif
+
+
+
+                        <li><a href="{{ route('messages') }}"><i class="fa fa-envelope" aria-hidden="true"></i> Messages</a></li>
                
 
                     <li class="dropdown">
@@ -62,10 +70,8 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             
-                            <li><a href="{{ url('/dashboard') }}"><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard</a></li>
 
-                            <li><a href="{{ route('messages') }}"><i class="fa fa-envelope" aria-hidden="true"></i>Messenger</a></li>
-                            
+
                             @if (Auth::User()->hasRole('investor'))
                             <li>
                                 <a href="{{ route('investor.favorites') }}"><i class="fa fa-heart" aria-hidden="true"></i>My Favorites</a>
