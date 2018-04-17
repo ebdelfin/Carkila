@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Models\Post;
@@ -16,22 +17,29 @@ class CommentController extends Controller
 
     public function store(Request $request) {
     	$this->validate($request, [
-    		'user_id' 	=> 'required',
-    		'post_id' 	=> 'required',
-    		'comment' 	=> 'required|min:60|max:5000',
+            'user_id' 	=> 'required',
+    		'owner_id' 	=> 'required',
+    		'comment' 	=> 'required|max:5000',
             'rate'      => 'required',
     	]);
 
-        $post = Post::find($request->input('post_id'));
-        $rate = $request->input('rate');
-        $user_id = auth()->user()->id;
+        //$post = Post::find($request->input('post_id'));
+        $user = User::find($request->input('user_id'));
 
-        if ($post->isRatedBy($user_id)) {
-            return back()->with('error', 'You already reviewed this business!');
+
+        $rate = $request->input('rate');
+
+        $current_user = auth()->user()->id;
+        $owner_id = $request->input('owner_id');
+        //$user_id = $request->input('user_id');
+
+
+        if ($user->isRatedBy($owner_id)) {
+            return back()->with('error', 'You already reviewed this user!');
         }
 
-        $post->getRatingBuilder()
-                 ->user($user_id) // you may also use $user->id
+        $user->getRatingBuilder()
+                 ->user($owner_id) // you may also use $user->id
                  ->uniqueRatingForUsers(true) // update if already rated
                  ->rate($rate);
      
@@ -39,7 +47,7 @@ class CommentController extends Controller
 
     	Comment::create([
     		'body' 		=> $request->input('comment'),
-    		'post_id' 	=> $request->input('post_id'),
+    		'owner_id' 	=> $request->input('owner_id'),
     		'user_id' 	=> $request->input('user_id'),
     	]);
 

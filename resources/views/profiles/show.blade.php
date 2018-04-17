@@ -3,6 +3,11 @@
 @section('template_title')
 	{{ $user->name }}'s Profile
 @endsection
+@section('template_linked_css')
+	<link rel="stylesheet" href="{{ asset('css/rating/star-rating.min.css') }}" />
+	<link rel="stylesheet" href="{{ asset('css/post.css') }}" />
+	<link rel="stylesheet" href="{{ asset('css/hero.css') }}" />
+@endsection
 
 @section('template_fastload_css')
 
@@ -109,6 +114,7 @@
 
 						</dl>
 
+
 						@if ($user->profile)
 							@if (Auth::user()->id == $user->id)
 
@@ -122,15 +128,74 @@
 
 						@endif
 
+
+					</div>
+
+				</div>
+
+				<div class="panel">
+
+					<div class="container">
+						<h6>User's average rating</h6>
+						<div class="rating" style="pointer-events: none;">
+							<input id="input-1" class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="{{ $rating }}" data-size="xs">
+						</div>
+					</div>
+				</div>
+				<div class="panel">
+					<div class="container">
+						<h5>Comments</h5>
+						<hr>
+
+						<div class="comments">
+							@foreach ($comments as $comment)
+								<div class="comment"><div class="comment-avatar"><img src="{{ $comment->user->profile->avatar }}"></div>
+									<div class="comment-box">
+										<div class="rating">
+											<input class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="{{ $comment->post->averageRatingForUser($comment->user_id) }}" data-size="xs">
+										</div>
+										<div class="comment-text">{{ $comment->body }}</div>
+										<div class="comment-footer">
+											<div class="comment-info">
+												<span class="comment-author"><em>{{ $comment->user->name }}</em></span>
+												<span class="comment-date">{{ $comment->created_at->diffForHumans() }}</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							@endforeach
+
+						</div>
 					</div>
 				</div>
 			</div>
+			</div>
+
 		</div>
+
 	</div>
+
+
 @endsection
 
 @section('footer_scripts')
+	<script src="{{ asset('js/rating/star-rating.min.js') }}"></script>
 
+	<script type="text/javascript">
+        $(document).ready(function(){
+            $(".menu").on("click", function(){
+                var dataMenu = $(this).data("menu");
+                var contentItem = $(".content .item[data-item="+ dataMenu +"]");
+                if (!$(this).hasClass("active") && !contentItem.hasClass("active")) {
+                    $(this).siblings().removeClass("active");
+                    $(this).addClass("active");
+                    contentItem.siblings().removeClass("active");
+                    contentItem.addClass("active");
+                }
+            });
+        });
+	</script>
 	@if(config('settings.googleMapsAPIStatus'))
 		@include('scripts.google-maps-geocode-and-map')
 	@endif

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Profile;
 use App\Models\Theme;
 use App\Models\User;
+use App\Models\Comment;
 use App\Notifications\SendGoodbyeEmail;
 use App\Traits\CaptureIpTrait;
 use File;
@@ -16,6 +17,8 @@ use Image;
 use jeremykenedy\Uuid\Uuid;
 use Validator;
 use View;
+use DB;
+
 
 class ProfilesController extends Controller
 {
@@ -76,16 +79,33 @@ class ProfilesController extends Controller
     {
         try {
             $user = $this->getUserByUsername($username);
+            $user1 = $this->getUserByUsername($username);
         } catch (ModelNotFoundException $exception) {
             abort(404);
         }
 
         $currentTheme = Theme::find($user->profile->theme_id);
+        $user1 = User::where('name',$username)->get();
+        $user2 = User::find(DB::table('users')->select('id')->where('name',$username)->implode('id'));
+        $user_all = User::all();
 
+        $lesson = User::first();
+        $rating = $user->averageRating;
+        $comments = Comment::where(user_id,DB::table('users')->select('id')->where('name',$username)->implode('id'));
         $data = [
             'user'         => $user,
             'currentTheme' => $currentTheme,
+            'user1' => $user1,
+            'rating' => $rating,
+            'comments' => $comments,
         ];
+
+        //return var_dump($user2);
+        //return var_dump($user->id);
+        //return var_dump($user2->id);
+        //return var_dump($user->averageRating);
+        return var_dump($comments);
+
 
         return view('profiles.show')->with($data);
     }

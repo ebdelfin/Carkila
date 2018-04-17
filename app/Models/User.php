@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Yoeunes\Rateable\Traits\Rateable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -14,6 +15,7 @@ class User extends Authenticatable
     use HasRoleAndPermission;
     use Notifiable;
     use SoftDeletes;
+    use Rateable;
 
     //Messaging
     use Messagable;

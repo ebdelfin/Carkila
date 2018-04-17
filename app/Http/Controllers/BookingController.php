@@ -102,8 +102,9 @@ class BookingController extends Controller
     public function show_request ($id)
     {
         $booking = Booking::find($id);
-        //return var_dump($booking);
-        return view ('pages.renter.bookings.show_request')->with('booking',$booking);
+        $transaction = Transaction::where('booking_id',$id)->get();
+        //return var_dump($transaction);
+        return view ('pages.renter.bookings.show_request')->with('booking',$booking)->with('transaction',$transaction);
     }
 
     public function approve_request ($booking)
