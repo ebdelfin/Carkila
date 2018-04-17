@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
@@ -30,7 +31,7 @@ class MessagesController extends Controller
         //$threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
 
         // All threads that user is participating in, with new messages
-         $threads = Thread::forUserWithNewMessages(Auth::id())->latest('updated_at')->get();
+        $threads = Thread::forUserWithNewMessages(Auth::id())->latest('updated_at')->get();
 
         return view('messenger.index', compact('threads'));
     }
@@ -82,12 +83,15 @@ class MessagesController extends Controller
      *
      * @return mixed
      */
-    public function create($user, Post $investment)
+    public function create($user, $vehicle_id)
     {
+        $var = Vehicle::find($vehicle_id);
         $data = [
             'user' =>  User::find($user),
-            'investment_title' => $investment->title,
+            'vehicle' => $var,
         ];
+
+        //return var_dump( $var);
 
         return view('messenger.create')->with($data);
     }
@@ -100,7 +104,8 @@ class MessagesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'subject'   => 'required',
+            'make'   => 'required',
+            'model'   => 'required',
             'message'   => 'required',
         ]);
 
@@ -108,7 +113,8 @@ class MessagesController extends Controller
         $input = Input::all();
 
         $thread = Thread::create([
-            'subject' => $input['subject'],
+            'subject' => $input['make']." ".$input['model'],
+
 
             //try
         ]);
@@ -132,7 +138,7 @@ class MessagesController extends Controller
             $thread->addParticipant($input['recipients']);
         }
 
-            Participant::create([
+        Participant::create([
             'thread_id' => $thread->id,
             'user_id' => Auth::id(),
         ]);
@@ -181,7 +187,7 @@ class MessagesController extends Controller
         if (Input::has('recipients')) {
             $thread->addParticipant(Input::get('recipients'));
         }
-        
+
         // restrict users from seeing other threads
         if($thread->hasParticipant(Auth::id())){
             $thread->markAsRead($id);
