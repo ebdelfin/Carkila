@@ -119,6 +119,19 @@ class BookingController extends Controller
         return redirect()->route('booking.show',[$vehicle_id])->with('success','Request Approved!')->with('requests',$requests);
     }
 
+    public function decline_request ($booking)
+    {
+        $a = Booking::find($booking);
+        $requests = Booking::where('vehicle_id','=',$booking)->get();
+        //$vehicle_id = Booking::find($booking)->get();
+        DB::table('bookings')->where('id','=', $booking)->update(['status' => "Declined" ]);
+        $vehicle_id = DB::table('bookings')->select('vehicle_id')->where('id','=', $booking)->implode('vehicle_id');
+
+        //return var_dump($booking);
+        //return var_dump($vehicle_id);
+        return redirect()->route('booking.show',[$vehicle_id])->with('success','Request Declined!')->with('requests',$requests);
+    }
+
     public function store_price(Request $request,$booking){
         $price = $request->input('price');
         $request = Booking::find($booking);

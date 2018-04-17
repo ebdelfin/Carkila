@@ -34,7 +34,7 @@
                             <td>{{$request->id}}</td>
                             <td>{{$request->start_date_time}}</td>
                             <td>{{$request->end_date_time}}</td>
-                            <td>{{DB::Table('users')->select('name')->where('id',$request->user_id)->implode('name')}}</td>
+                            <td><a href="{{ url('profile/'. DB::table('users')->select('name')->where('id',$request->user_id)->implode('name')) }}"> {{DB::table('users')->select('name')->where('id',$request->user_id)->implode('name')}}</a></td>
                             <td>{{$request->status}}</td>
                             <td><a href=" {{ route('booking.show_request', ['booking_id' => $request->id])}} " class="btn btn-twitter">View</a></td>
                         </tr>

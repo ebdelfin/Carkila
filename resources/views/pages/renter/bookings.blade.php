@@ -32,7 +32,7 @@
                         <td>{{$booking->start_date_time}}</td>
                         <td>{{$booking->end_date_time}}</td>
                         <td>{{DB::table('vehicles')->select('model')->where('id',$booking->vehicle_id)->implode('model')}}</td>
-                        <td>{{DB::table('users')->select('name')->where('id',$booking->owner_id)->implode('name')}}</td>
+                        <td><a href="{{ url('profile/'. DB::table('users')->select('name')->where('id',$booking->owner_id)->implode('name')) }}"> {{DB::table('users')->select('name')->where('id',$booking->owner_id)->implode('name')}}</a></td>
                         <td>{{$booking->status}}</td>
 
                     </tr>

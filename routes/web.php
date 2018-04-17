@@ -165,6 +165,7 @@ Route::get('/booking/create_request/{owner_id}/{vehicle}', 'BookingController@cr
 Route::get('/booking/view/{booking_id}', 'BookingController@show_request')->name('booking.show_request');
 Route::get('/booking/approve_request/{booking_id}', 'BookingController@approve_request')->name('booking.approve_request');
 Route::post('/booking/approve_request/{booking_id}/store', 'BookingController@store_price')->name('booking.store_price');
+Route::get('/booking/decline_request/{booking_id}', 'BookingController@decline_request')->name('booking.decline_request');
 // CartController
 Route::resource('cart', 'CartController');
 

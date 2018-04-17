@@ -13,6 +13,7 @@
     <div class="panel panel-default p-1">
         <div class="well">
            {{$booking->destination}}
+            <p>Renter: <a href="{{ url('profile/'. DB::table('users')->select('name')->where('id',$booking->user_id)->implode('name')) }}"> {{DB::table('users')->select('name')->where('id',$booking->user_id)->implode('name')}}</a></p>
             {{-- Add mo yung ibang info like $booking->pickup_location, $booking->start_date_time etc.--}}
 
 
@@ -21,7 +22,7 @@
     <div class="container">
         @if ($booking->status == "Pending")
             <div class="col-sm-6"><a href=" {{ route('booking.approve_request', ['booking' => $booking->id])}} " class="btn btn-success">Accept</a></div>
-            <div class="col-sm-6"><a href=" {{ route('booking.show_request', ['booking_id' => $booking->id])}} " class="btn btn-danger">Decline</a></div>
+            <div class="col-sm-6"><a href=" {{ route('booking.decline_request', ['booking_id' => $booking->id])}} " class="btn btn-danger">Decline</a></div>
         @elseif ($booking->status == "Approved")
             {!! Form::open(['action' => array('BookingController@store_price','booking_id' => $booking->id), 'method' => 'POST']) !!}
             <div class="form-group row">
@@ -35,7 +36,12 @@
 
             {!! Form::close() !!}
         @elseif ($booking->status == "Completed")
-            Booking is completed at {{$booking->created_at}}
+            Booking is completed!
+
+
+            {!! Form::close() !!}
+        @elseif ($booking->status == "Declined")
+            Booking is declined!
 
 
             {!! Form::close() !!}

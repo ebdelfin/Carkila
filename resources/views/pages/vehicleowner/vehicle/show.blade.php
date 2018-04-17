@@ -52,6 +52,7 @@
                 <h3>Capacity: {{$vehicle->seating_capacity}}</h3>
                 <h1>Rental Rate: {{$vehicle->rental_rate}}</h1>
                 <h3>Address: {{$address}}</h3>
+                <h3>Owner: <a href="{{ url('profile/'. DB::table('users')->select('name')->where('id',$vehicle->user_id)->implode('name')) }}"> {{DB::table('users')->select('name')->where('id',$vehicle->user_id)->implode('name')}}</a></h3>
 
 
 

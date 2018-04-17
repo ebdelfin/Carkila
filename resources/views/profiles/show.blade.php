@@ -62,14 +62,7 @@
 
 							@if ($user->profile)
 
-								@if ($user->profile->theme_id)
-									<dt>
-										{{ trans('profile.showProfileTheme') }}
-									</dt>
-									<dd>
-										{{ $currentTheme->name }}
-									</dd>
-								@endif
+
 
 								@if ($user->profile->location)
 									<dt>
