@@ -151,17 +151,11 @@
 							@foreach ($comments as $comment)
 								<div class="comment"><div class="comment-avatar"><img src="{{ $comment->user->profile->avatar }}"></div>
 									<div class="comment-box">
-										<div class="rating">
-											<input class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="{{ $comment->post->averageRatingForUser($comment->user_id) }}" data-size="xs">
-										</div>
-										<div class="comment-text">{{ $comment->body }}</div>
-										<div class="comment-footer">
-											<div class="comment-info">
-												<span class="comment-author"><em>{{ $comment->user->name }}</em></span>
-												<span class="comment-date">{{ $comment->created_at->diffForHumans() }}</span>
-											</div>
+										<blockquote class="blockquote">
+											<p class="mb-0">{{ $comment->body }}</p>
+											<footer class="blockquote-footer">{{$comment->user->name}}</footer>
+										</blockquote>
 
-										</div>
 									</div>
 								</div>
 							@endforeach

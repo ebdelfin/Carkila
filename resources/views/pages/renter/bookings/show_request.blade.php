@@ -38,6 +38,58 @@
         @elseif ($booking->status == "Completed")
             Booking is completed!
 
+            <hr>
+            <h3>Rate the user</h3>
+            @if (Auth::check())
+                <div class="comment-form">
+                    <div class="comment-avatar"><img src="{{ Auth::user()->profile->avatar }}"></div>
+                    <form name="form" class="form" method="POST" action="{{ route('comments.store') }}">
+                        {{ csrf_field() }}
+
+                        <div class="form-row">
+                            <textarea name="comment" placeholder="Add comment..." required="required" class="input"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="rating">
+
+                                <input id="input-1" name="rate" class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="" data-size="xs">
+
+                                @if ($errors->has('rate'))
+                                    <span class="text-danger">
+                                                    <strong>{{ $errors->first('rate') }}</strong>
+                                                </span>
+                                @endif
+
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <input placeholder="{{ Auth::user()->name }}" type="text" disabled="disabled" class="input">
+                        </div>
+
+                        <input type="hidden" name="owner_id" required="" value="{{ $booking->owner_id }}">
+
+                        <input type="hidden" name="user_id" required="" value="{{ $booking->user_id }}">
+
+                        <div class="form-row">
+                            <input type="submit" value="Submit Review" class="btn btn-success">
+                        </div>
+
+                    </form>
+                </div>
+            @else
+                <div class="comment-form">
+                    <div class="comment-avatar"><img src="{{ asset('images/smile.png') }}"></div>
+                    <form name="form" class="form">
+                        <div class="form-row">
+                            <a href="{{ route('login') }}">
+                                <textarea name="comment" placeholder="Add comment..." required="required" class="input"></textarea>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            @endif
+
 
             {!! Form::close() !!}
         @elseif ($booking->status == "Declined")
@@ -51,57 +103,7 @@
 
     </div>
 
-    <hr>
-    <h3>Rate the user</h3>
-            @if (Auth::check())
-                        <div class="comment-form">
-                            <div class="comment-avatar"><img src="{{ Auth::user()->profile->avatar }}"></div>
-                            <form name="form" class="form" method="POST" action="{{ route('comments.store') }}">
-                                {{ csrf_field() }}
 
-                                <div class="form-row">
-                                    <textarea name="comment" placeholder="Add comment..." required="required" class="input"></textarea>
-                                </div>
-                                <div class="form-row">
-                                    <div class="rating">
-
-                                        <input id="input-1" name="rate" class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="" data-size="xs">
-
-                                        @if ($errors->has('rate'))
-                                            <span class="text-danger">
-                                                    <strong>{{ $errors->first('rate') }}</strong>
-                                                </span>
-                                        @endif
-
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <input placeholder="{{ Auth::user()->name }}" type="text" disabled="disabled" class="input">
-                                </div>
-
-                                <input type="hidden" name="owner_id" required="" value="{{ $booking->owner_id }}">
-
-                                <input type="hidden" name="user_id" required="" value="{{ $booking->user_id }}">
-
-                                <div class="form-row">
-                                    <input type="submit" value="Submit Review" class="btn btn-success">
-                                </div>
-
-                            </form>
-                        </div>
-            @else
-                <div class="comment-form">
-                    <div class="comment-avatar"><img src="{{ asset('images/smile.png') }}"></div>
-                    <form name="form" class="form">
-                        <div class="form-row">
-                            <a href="{{ route('login') }}">
-                                <textarea name="comment" placeholder="Add comment..." required="required" class="input"></textarea>
-                            </a>
-                        </div>
-                    </form>
-                </div>
-            @endif
 
 
 

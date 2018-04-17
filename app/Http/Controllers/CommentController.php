@@ -34,13 +34,13 @@ class CommentController extends Controller
         //$user_id = $request->input('user_id');
 
 
-        if ($user->isRatedBy($owner_id)) {
-            return back()->with('error', 'You already reviewed this user!');
-        }
+        //if ($user->isRatedBy($owner_id)) {
+        //    return back()->with('error', 'You already reviewed this user!');
+        //}
 
         $user->getRatingBuilder()
                  ->user($owner_id) // you may also use $user->id
-                 ->uniqueRatingForUsers(true) // update if already rated
+                 ->uniqueRatingForUsers(false) // update if already rated
                  ->rate($rate);
      
 

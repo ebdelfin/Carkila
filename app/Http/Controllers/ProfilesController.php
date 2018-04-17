@@ -91,7 +91,7 @@ class ProfilesController extends Controller
 
         $lesson = User::first();
         $rating = $user->averageRating;
-        $comments = Comment::where(user_id,DB::table('users')->select('id')->where('name',$username)->implode('id'));
+        $comments = Comment::where('user_id',DB::table('users')->select('id')->where('name',$username)->implode('id'))->get();
         $data = [
             'user'         => $user,
             'currentTheme' => $currentTheme,
@@ -104,7 +104,7 @@ class ProfilesController extends Controller
         //return var_dump($user->id);
         //return var_dump($user2->id);
         //return var_dump($user->averageRating);
-        return var_dump($comments);
+        //return var_dump($comments);
 
 
         return view('profiles.show')->with($data);
