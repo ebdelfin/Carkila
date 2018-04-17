@@ -73,6 +73,36 @@ class UsersTableSeeder extends Seeder
             ]);
 
         }
+        $user = User::where('email', '=', 'vehicleowner2@user.com')->first();
+        if ($user === null) {
+            $user = User::create([
+                'name'                           => $faker->userName,
+                'first_name'                     => $faker->firstName,
+                'last_name'                      => $faker->lastName,
+                'gender'                      => 'Female',
+                'city'                      => 'Mandaluyong City',
+                'address'                      => 'owner2address',
+                'mobile_number'                      => '09123456789',
+                'birth_date'                      => '2018-04-14',
+                'email'                          => 'vehicleowner2@user.com',
+                'password'                       => Hash::make('password'),
+                'token'                          => str_random(64),
+                'activated'                      => true,
+                'signup_ip_address'              => $faker->ipv4,
+                'signup_confirmation_ip_address' => $faker->ipv4,
+            ]);
+
+            $user->profile()->save(new Profile());
+            $user->attachRole($vehicleOwnerRole);
+            $user->save();
+
+            Owner::create([
+                'license_number'                           => '321321',
+                'license_expiry'                         => '2018-02-14',
+                'user_id'                         => $user->id,
+            ]);
+
+        }
 
 
 
@@ -87,10 +117,34 @@ class UsersTableSeeder extends Seeder
                 'last_name'                      => $faker->lastName,
                 'gender'                      => 'Female',
                 'city'                      => 'Pasay City',
-                'address'                      => 'someaddress',
+                'address'                      => 'renter1addresss',
                 'mobile_number'                      => '09987654321',
                 'birth_date'                      => '2018-04-14',
                 'email'                          => 'renter@user.com',
+                'password'                       => Hash::make('password'),
+                'token'                          => str_random(64),
+                'activated'                      => true,
+                'signup_ip_address'              => $faker->ipv4,
+                'signup_confirmation_ip_address' => $faker->ipv4,
+            ]);
+
+            $user->profile()->save(new Profile());
+            $user->attachRole($renterRole);
+            $user->save();
+        }
+
+        $user = User::where('email', '=', 'renter2@user.com')->first();
+        if ($user === null) {
+            $user = User::create([
+                'name'                           => $faker->userName,
+                'first_name'                     => $faker->firstName,
+                'last_name'                      => $faker->lastName,
+                'gender'                      => 'Female',
+                'city'                      => 'Paranaque City',
+                'address'                      => 'renter2address',
+                'mobile_number'                      => '09987654321',
+                'birth_date'                      => '2018-04-14',
+                'email'                          => 'renter2@user.com',
                 'password'                       => Hash::make('password'),
                 'token'                          => str_random(64),
                 'activated'                      => true,
