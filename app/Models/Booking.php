@@ -31,4 +31,8 @@ class Booking extends Model
     public function vehicle(){
         return $this->belongsTo('App\Models\Vehicle');
     }
+    public function transactions()
+    {
+        return $this->hasMany('App\Models\Transactions');
+    }
 }

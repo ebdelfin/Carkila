@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Image;
@@ -197,7 +198,7 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::find($id);
+        $post = Vehicle::find($id);
 
         if(auth()->user()->id !==$post->user_id){
             return redirect()->route('home')->with('error', 'Unauthorized Page');

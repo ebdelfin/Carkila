@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use DB;
 
@@ -61,6 +62,7 @@ class BookingController extends Controller
         $start_seconds= $request->input('start_seconds');
         $start_date_time = $start_date . " " . sprintf("%02d", $start_hours) .":". sprintf("%02d", $start_minutes) .":". $start_seconds;
 
+
         $booking->start_date_time =  $start_date_time;
 
         $end_date = $request->input('end_date');
@@ -91,9 +93,49 @@ class BookingController extends Controller
      */
     public function show($id)
     {
-        $requests = Booking::where('vehicle_id','=',$id)->first();
+        $requests = Booking::where('vehicle_id','=',$id)->get();
         //return var_dump($requests);
         return view ('pages.renter.bookings.show')->with('requests',$requests);
+    }
+
+
+    public function show_request ($id)
+    {
+        $booking = Booking::find($id);
+        //return var_dump($booking);
+        return view ('pages.renter.bookings.show_request')->with('booking',$booking);
+    }
+
+    public function approve_request ($booking)
+    {
+        $a = Booking::find($booking);
+        $requests = Booking::where('vehicle_id','=',$booking)->get();
+        //$vehicle_id = Booking::find($booking)->get();
+        DB::table('bookings')->where('id','=', $booking)->update(['status' => "Approved" ]);
+        $vehicle_id = DB::table('bookings')->select('vehicle_id')->where('id','=', $booking)->implode('vehicle_id');
+
+        //return var_dump($booking);
+        //return var_dump($vehicle_id);
+        return redirect()->route('booking.show',[$vehicle_id])->with('success','Request Approved!')->with('requests',$requests);
+    }
+
+    public function store_price(Request $request,$booking){
+        $price = $request->input('price');
+        $request = Booking::find($booking);
+        $requests = Booking::where('vehicle_id','=',$booking)->get();
+
+        $transaction = new Transaction();
+        $transaction->price = $price;
+        $transaction->user_id =$request->user_id;
+        $transaction->owner_id = $request->owner_id;
+        $transaction->booking_id = $booking;
+        $transaction->save();
+        DB::table('bookings')->where('id','=', $booking)->update(['status' => "Completed" ]);
+        $vehicle_id = DB::table('bookings')->select('vehicle_id')->where('id','=', $booking)->implode('vehicle_id');
+
+        //return var_dump($booking);
+        //return var_dump($request->user_id);
+        return redirect()->route('booking.show',[$vehicle_id])->with('success','Request Completed!')->with('requests',$requests);
     }
 
     /**

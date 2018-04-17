@@ -141,4 +141,8 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Booking');
     }
+    public function transactions()
+    {
+        return $this->hasMany('App\Models\Transaction');
+    }
 }
