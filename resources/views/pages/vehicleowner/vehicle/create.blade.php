@@ -39,6 +39,21 @@
                     @endif
                 </div>
 
+            <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+            <label for="type" class="col-sm-4 control-label">Type</label>
+            <div class="col-sm-6">
+                {!! Form::select('type', ['Sedan' => 'Sedan', 'Van' => 'Van', 'SUV' => 'SUV'], null, ['class' => 'form-control','placeholder' => 'Select Vehicle Type']); !!}
+                @if ($errors->has('type'))
+                    <span class="help-block">
+                                                <strong>{{ $errors->first('type') }}</strong>
+                                            </span>
+                @endif
+            </div>
+        </div>
+
+            <br>
+            <br>
+
                 <div class="form-group">
                     {{Form::label('color', 'Color')}}
                     {{Form::text ('color', '', ['class'=>'form-control', 'placeholder'=> 'color'])}}
@@ -91,6 +106,8 @@
                     @endif
                 </div>
 
+
+
                 <div class="form-group">
                     {{Form::label('rental_rate', 'Rental Rate')}}
                     {{Form::text ('rental_rate', '', ['class'=>'form-control', 'placeholder'=> 'Price'])}}
@@ -101,7 +118,15 @@
                     @endif
                 </div>
 
-
+            <div class="form-group">
+                {{Form::label('notes', 'Notes')}}
+                {{Form::textarea('notes', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Description here'])}}
+                @if ($errors->has('notes'))
+                    <span class="text-danger">
+                        <strong>{{ $errors->first('notes') }}</strong>
+                    </span>
+                @endif
+            </div>
 
 
                 <div class="form-group">
@@ -113,6 +138,7 @@
                         </span>
                     @endif
                 </div>
+
 
 
 

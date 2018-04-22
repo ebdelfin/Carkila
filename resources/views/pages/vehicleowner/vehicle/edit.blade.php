@@ -66,7 +66,7 @@
 
                     <div class="form-group">
                         {{Form::label('engine_number', 'Engine Number')}}
-                        {{Form::text ('engine_number', $vehicle->engine_number, ['class'=>'form-control', 'placeholder'=> 'Engine Number'])}}
+                        {{Form::text ('engine_number', $vehicle->engine_number, ['class'=>'form-control', 'disabled'])}}
                         @if ($errors->has('engine_number'))
                             <span class="text-danger">
                                                 <strong>{{ $errors->first('engine_number') }}</strong>
@@ -77,7 +77,7 @@
 
                     <div class="form-group">
                         {{Form::label('chassis_number', 'Chassis Number')}}
-                        {{Form::text ('chassis_number', $vehicle->chassis_number, ['class'=>'form-control', 'placeholder'=> 'Chassis Number'])}}
+                        {{Form::text ('chassis_number', $vehicle->chassis_number, ['class'=>'form-control', 'disabled'])}}
                         @if ($errors->has('chassis_number'))
                             <span class="text-danger">
                                                     <strong>{{ $errors->first('chassis_number') }}</strong>
@@ -87,7 +87,7 @@
 
                     <div class="form-group">
                         {{Form::label('plate_number', 'Plate Number')}}
-                        {{Form::text ('plate_number', $vehicle->plate_number, ['class'=>'form-control', 'placeholder'=> 'Plate Number'])}}
+                        {{Form::text ('plate_number', $vehicle->plate_number, ['class'=>'form-control', 'disabled'])}}
                         @if ($errors->has('plate_number'))
                             <span class="text-danger">
                                                         <strong>{{ $errors->first('plate_number') }}</strong>
