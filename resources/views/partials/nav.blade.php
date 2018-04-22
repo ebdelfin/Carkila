@@ -19,7 +19,7 @@
 
             <form action="{{ route('search') }}" method="POST" class="d-flex search-form">
                 {{ csrf_field() }}
-                <input type="text" name="search" placeholder="Where do you want to invest?">
+                <input type="text" name="search" placeholder="Search">
                 <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
             </form>
 
