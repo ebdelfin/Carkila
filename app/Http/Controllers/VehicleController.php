@@ -104,8 +104,8 @@ class VehicleController extends Controller
     public function show($id)
     {
         $vehicle = Vehicle::find($id);
-        $address = DB::table('users')->select('address')->where('id','=',(DB::table('vehicles')->select('user_id')->where('id','=',$id))->implode('user_id'))->get()->implode('address');
-        return view('pages.vehicleowner.vehicle.show')->with('vehicle',$vehicle)->with('address',$address);
+       /* $address = DB::table('users')->select('address')->where('id','=',(DB::table('vehicles')->select('user_id')->where('id','=',$id))->implode('user_id'))->get()->implode('address');
+        return view('pages.vehicleowner.vehicle.show')->with('vehicle',$vehicle)->with('address',$address);*/
     }
 
     /**

@@ -51,7 +51,7 @@
                 <h3>{{$vehicle->make}} {{$vehicle->model}} {{$vehicle->year}}</h3>
                 <h3>Capacity: {{$vehicle->seating_capacity}}</h3>
                 <h1>Rental Rate: {{$vehicle->rental_rate}}</h1>
-                <h3>Address: {{$address}}</h3>
+                {{--<h3>Address: {{$address}}</h3>--}}
                 <h3>Owner: <a href="{{ url('profile/'. DB::table('users')->select('first_name')->where('id',$vehicle->user_id)->implode('first_name')) }}"> {{DB::table('users')->select('first_name')->where('id',$vehicle->user_id)->implode('first_name')}}
                         {{DB::table('users')->select('last_name')->where('id',$vehicle->user_id)->implode('last_name')}}
 
@@ -86,7 +86,7 @@
                 <p></p>
                         <div class="container">
                                 <a href="{{ route('messages.create', ['user' => $vehicle->user, 'vehicle' => $vehicle])  }}" class="btn btn-twitch">
-                                    Message Business Owner
+                                    Message Vehicle Owner
                                     <i aria-hidden="true" class="fa fa-envelope"></i>
                                 </a>
                         </div>

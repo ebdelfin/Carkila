@@ -18,7 +18,6 @@ class CreateBusinessesTable extends Migration
             $table->string('name');
             $table->integer('user_id')->references('id')->on('users');
             $table->string('nature');
-            $table->string('address');
             $table->timestamps();
         });
 

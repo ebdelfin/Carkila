@@ -14,6 +14,7 @@
                         {{ csrf_field() }}
 
 
+                    <!--Choose Role-->
                         <div class="form-group">
                             <label for="user_role" class="col-sm-4 control-label" name="user_role">What are you:</label>
                             <div class="col-sm-6">
@@ -25,10 +26,7 @@
                             </div>
                         </div>
 
-
-
-
-
+                        <!--Username-->
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-sm-4 control-label">Username</label>
                             <div class="col-sm-6">
@@ -41,6 +39,7 @@
                             </div>
                         </div>
 
+                        <!--First Name-->
                         <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                             <label for="first_name" class="col-sm-4 control-label">First Name</label>
                             <div class="col-sm-6">
@@ -53,6 +52,7 @@
                             </div>
                         </div>
 
+                        <!--Last Name-->
                         <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                             <label for="last_name" class="col-sm-4 control-label">Last Name</label>
                             <div class="col-sm-6">
@@ -65,33 +65,52 @@
                             </div>
                         </div>
 
+                    {{--    <!--Gender-->
                         <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
                             <label for="email" class="col-sm-4 control-label">Gender</label>
                             <div class="col-sm-6">
-                                {!! Form::select('gender', ['Male' => 'Male', 'Female' => 'Female'], null, ['class' => 'form-control','placeholder' => 'Choose gender']); !!}
+                                {!! Form::select('gender', ['Male', 'Female' => 'Female',], null, ['class' => 'form-control','placeholder' => 'Choose gender']); !!}
                                 @if ($errors->has('gender'))
                                     <span class="help-block">
                                             <strong>{{ $errors->first('gender') }}</strong>
                                         </span>
                                 @endif
                             </div>
-                        </div>
+                        </div>--}}
 
-                        <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                            <label for="last_name" class="col-sm-4 control-label">Address</label>
+                        <!--Street-->
+                        <div class="form-group{{ $errors->has('street') ? ' has-error' : '' }}">
+                            <label for="last_name" class="col-sm-4 control-label">Street</label>
                             <div class="col-sm-6">
-                                {!! Form::text('address', null, ['class' => 'form-control', 'placeholder' => 'Address', 'id' => 'address']) !!}
-                                @if ($errors->has('address'))
+                                {!! Form::text('street', null, ['class' => 'form-control', 'placeholder' => 'Street', 'id' => 'street']) !!}
+                                @if ($errors->has('street'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('address') }}</strong>
+                                            <strong>{{ $errors->first('street') }}</strong>
                                         </span>
                                 @endif
                             </div>
                         </div>
+
+                        <!--Barangay-->
+                        <div class="form-group{{ $errors->has('barangay') ? ' has-error' : '' }}">
+                            <label for="last_name" class="col-sm-4 control-label">Barangay</label>
+                            <div class="col-sm-6">
+                                {!! Form::text('barangay', null, ['class' => 'form-control', 'placeholder' => 'Barangay', 'id' => 'brangay']) !!}
+                                @if ($errors->has('barangay'))
+                                    <span class="help-block">
+                                            <strong>{{ $errors->first('barangay') }}</strong>
+                                        </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!--City-->
                         <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
                             <label for="last_name" class="col-sm-4 control-label">City</label>
                             <div class="col-sm-6">
-                                {!! Form::text('city', null, ['class' => 'form-control', 'placeholder' => 'City', 'id' => 'city']) !!}
+                                {!! Form::select('gender', ['Others' => 'Others', 'Caloocan City' => 'Caloocan', 'Las Pinas City' => 'Las Piñas', 'Makati City' => 'Makati', 'Malabon City' => 'Malabon', 'Mandaluyong City' => 'Mandaluyong',
+                                 'Manila City' => 'Manila', 'Marikina City' => 'Marikina', 'Muntinlupa City' => 'Muntinlupa', 'Navotas City' => 'Navotas', 'Paranaque City' => 'Parañaque', 'Pasay City' => 'Pasay', 'Pasig City' => 'Pasig', 'Pateros City' => 'Pateros',
+                                 'Quezon City' => 'Quezon City', 'San Juan City' => 'San Juan', 'Taguig City' => 'Taguig', 'Valenzuela City' => 'Valenzuela'], null, ['class' => 'form-control','placeholder' => 'Select City']); !!}
                                 @if ($errors->has('city'))
                                     <span class="help-block">
                                                 <strong>{{ $errors->first('city') }}</strong>
@@ -99,17 +118,8 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('birth_date') ? ' has-error' : '' }}">
-                            <label for="business_nature" class="col-sm-4 control-label">Birth date</label>
-                            <div class="col-sm-6">
-                                {!! Form::date('birth_date', \Carbon\Carbon::now()); !!}
-                                @if ($errors->has('birth_date'))
-                                    <span class="help-block">
-                                                <strong>{{ $errors->first('birth_date') }}</strong>
-                                            </span>
-                                @endif
-                            </div>
-                        </div>
+
+                        <!--Mobile Number-->
                         <div class="form-group{{ $errors->has('mobile_number') ? ' has-error' : '' }}">
                             <label for="last_name" class="col-sm-4 control-label">Mobile Number</label>
                             <div class="col-sm-6">
@@ -122,23 +132,13 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-sm-4 control-label">E-Mail Address</label>
-                            <div class="col-sm-6">
-                                {!! Form::email('email', null, ['class' => 'form-control', 'id' => 'email', 'placeholder' => 'E-Mail Address', 'required']) !!}
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-
 
                     <div id="businessOwnerFields">
-
+                        <br>
+                        <center>
+                            <i class="fa fa-car" style="font-size:24px"></i><span class="oi" data-glyph="graph"></span>
+                        </center>
+                        <br>
                         <div class="form-group{{ $errors->has('business_name') ? ' has-error' : '' }}">
                             <label for="first_name" class="col-sm-4 control-label">License Number</label>
                             <div class="col-sm-6">
@@ -163,7 +163,49 @@
                             </div>
                         </div>
 
+
+                            <div class="form-group">
+                                <label for="first_name" class="col-sm-4 control-label">Driver's License</label>
+                                <div class="col-sm-6">
+                                {{Form::file('featured_image')}}
+                                @if ($errors->has('featured_image'))
+                                    <span class="text-danger">
+                            <strong>{{ $errors->first('featured_image') }}</strong>
+                        </span>
+                                @endif
+                            </div>
+                            </div>
+
+
+                            <div id="post-featured-image"  style="width: 100%;
+                                                                background-size: contain;
+                                                                background-repeat: no-repeat;
+                                                                background-position: center;">
+
+                            </div>
+
                     </div>
+                        <br>
+
+
+                        <center>
+                            <span class="glyphicon glyphicon-minus"></span> <span class="glyphicon glyphicon-minus"></span> <span class="glyphicon glyphicon-minus"></span>
+                        </center>
+                        <br>
+                        <!--Email-->
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="col-sm-4 control-label">E-Mail Address</label>
+                            <div class="col-sm-6">
+                                {!! Form::email('email', null, ['class' => 'form-control', 'id' => 'email', 'placeholder' => 'E-Mail Address', 'required']) !!}
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!--Password-->
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-sm-4 control-label">Password</label>
                             <div class="col-sm-6">
@@ -176,6 +218,7 @@
                             </div>
                         </div>
 
+                        <!--Password Confirmation-->
                         <div class="form-group">
                             <label for="password-confirm" class="col-sm-4 control-label">Confirm Password</label>
                             <div class="col-sm-6">
