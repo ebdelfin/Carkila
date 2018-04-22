@@ -15,7 +15,6 @@ class AddAddressValuesToUserTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('street')->nullable()->after('gender');
-            $table->string('barangay')->nullable();
         });
     }
 
@@ -28,7 +27,6 @@ class AddAddressValuesToUserTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('street');
-            $table->dropColumn('barangay');
         });
     }
 }
