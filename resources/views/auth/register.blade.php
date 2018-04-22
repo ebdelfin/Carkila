@@ -9,7 +9,7 @@
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
 
-                    {!! Form::open(['route' => 'register', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'POST'] ) !!}
+                    {!! Form::open(['route' => 'register', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'POST','files'=>true] ) !!}
 
                         {{ csrf_field() }}
 
