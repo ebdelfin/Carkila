@@ -70,7 +70,6 @@ class VehicleController extends Controller
         $vehicle->chassis_number = $request->input('chassis_number');
         $vehicle->plate_number = $request->input('plate_number');
         $vehicle->rental_rate = $request->input('rental_rate');
-
         $vehicle->user_id = auth()->user()->id;
 
         if ($request->hasFile('featured_image')) {
@@ -104,8 +103,8 @@ class VehicleController extends Controller
     public function show($id)
     {
         $vehicle = Vehicle::find($id);
-       /* $address = DB::table('users')->select('address')->where('id','=',(DB::table('vehicles')->select('user_id')->where('id','=',$id))->implode('user_id'))->get()->implode('address');
-        return view('pages.vehicleowner.vehicle.show')->with('vehicle',$vehicle)->with('address',$address);*/
+        $address = DB::table('users')->select('address')->where('id','=',(DB::table('vehicles')->select('user_id')->where('id','=',$id))->implode('user_id'))->get()->implode('address');
+        return view('pages.vehicleowner.vehicle.show')->with('vehicle',$vehicle)->with('address',$address);
     }
 
     /**

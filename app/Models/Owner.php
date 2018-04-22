@@ -9,6 +9,7 @@ class Owner extends Model
     protected $fillable = [
         'license_number',
         'license_expiry',
+        'image',
         'user_id',
     ];
 

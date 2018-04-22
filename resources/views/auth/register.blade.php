@@ -108,7 +108,7 @@
                         <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
                             <label for="last_name" class="col-sm-4 control-label">City</label>
                             <div class="col-sm-6">
-                                {!! Form::select('gender', ['Others' => 'Others', 'Caloocan City' => 'Caloocan', 'Las Pinas City' => 'Las Piñas', 'Makati City' => 'Makati', 'Malabon City' => 'Malabon', 'Mandaluyong City' => 'Mandaluyong',
+                                {!! Form::select('city', ['Others' => 'Others', 'Caloocan City' => 'Caloocan', 'Las Pinas City' => 'Las Piñas', 'Makati City' => 'Makati', 'Malabon City' => 'Malabon', 'Mandaluyong City' => 'Mandaluyong',
                                  'Manila City' => 'Manila', 'Marikina City' => 'Marikina', 'Muntinlupa City' => 'Muntinlupa', 'Navotas City' => 'Navotas', 'Paranaque City' => 'Parañaque', 'Pasay City' => 'Pasay', 'Pasig City' => 'Pasig', 'Pateros City' => 'Pateros',
                                  'Quezon City' => 'Quezon City', 'San Juan City' => 'San Juan', 'Taguig City' => 'Taguig', 'Valenzuela City' => 'Valenzuela'], null, ['class' => 'form-control','placeholder' => 'Select City']); !!}
                                 @if ($errors->has('city'))

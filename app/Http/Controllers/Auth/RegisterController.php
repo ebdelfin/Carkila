@@ -107,18 +107,20 @@ class RegisterController extends Controller
             return Validator::make($data,
                 [
                     'user_role'             => 'required|in:Vehicle Owner',
-                    'license_number'         => 'required',
-                    'license_expiry'       => 'required',
+                    'license_number'        => 'required',
+                    'license_expiry'        => 'required',
                     'name'                  => 'required|max:255|unique:users',
                     'first_name'            => 'required',
                     'last_name'             => 'required',
-                    'gender'             => 'required',
-                    'address'             => 'required',
+                    'street'                => 'required',
+                    'barangay'              => 'required',
+/*                    'gender'              => 'required',*/
                     'city'             => 'required',
-                    'birth_date'             => 'required',
+/*                    'birth_date'             => 'required',*/
                     'email'                 => 'required|email|max:255|unique:users',
                     'password'              => 'required|min:6|max:20|confirmed',
                     'password_confirmation' => 'required|same:password',
+                    'image'                 => 'required|image',
                 ],
                 [
                     'name.unique'                   => trans('auth.userNameTaken'),
@@ -139,10 +141,11 @@ class RegisterController extends Controller
                 'name'                  => 'required|max:255|unique:users',
                 'first_name'            => 'required',
                 'last_name'             => 'required',
-                'gender'             => 'required',
-                'address'             => 'required',
+      /*          'gender'             => 'required',*/
+                'street'                => 'required',
+                'barangay'                => 'required',
                 'city'             => 'required',
-                'birth_date'             => 'required',
+/*                'birth_date'             => 'required',*/
                 'email'                 => 'required|email|max:255|unique:users|domainos:allow',
                 'password'              => 'required|min:6|max:20|confirmed',
                 'password_confirmation' => 'required|same:password',
@@ -181,7 +184,7 @@ class RegisterController extends Controller
 
         $role = $data['user_role']; //Retrieving the user_role field
 
-        $role_r = Role::where('name', '=', $role)->first();            
+        $role_r = Role::where('name', '=', $role)->first();
             
         
 
@@ -190,11 +193,12 @@ class RegisterController extends Controller
                 'first_name'        => $data['first_name'],
                 'last_name'         => $data['last_name'],
                 'email'             => $data['email'],
-                'gender'             => $data['gender'],
-                'address'             => $data['address'],
+     /*           'gender'             => $data['gender'],*/
+                'street'            => 'required',
+                'barangay'          => 'required',
                 'mobile_number'     => $data['mobile_number'],
-                'city'             => $data['city'],
-                'birth_date'             => $data['birth_date'],
+                'city'              => $data['city'],
+    /*            'birth_date'        => $data['birth_date'],*/
                 'password'          => bcrypt($data['password']),
                 'token'             => str_random(64),
                 'signup_ip_address' => $ipAddress->getClientIp(),
@@ -204,12 +208,27 @@ class RegisterController extends Controller
         if ($role_r->slug == "vehicle.owner") {
             $owner = Owner::create([
                 'license_number'                  => $data['license_number'],
-                'license_expiry'                => $data['license_expiry'],
-                'user_id'               => $user->id,
+                'license_expiry'                  => $data['license_expiry'],
+                'image'                           => $data['featured_image'],
+                'user_id'                         => $user->id,
             ]);
-        } 
+            if ($request->hasFile('featured_image')) {
+                $image  = $request->file('featured_image');
+                $file_name =  time() . '.' . $image->getClientOriginalExtension();
+                $location = public_path() . '/images/users/id/' . $owner->user_id . '/uploads/licenses/';
+
+                // Make the user a folder and set permissions
+
+                if (!file_exists($location)) {
+                    mkdir($location, 666, true);
+                }
 
 
+                Image::make($image)->save($location.$file_name);
+
+                $owner->image = '/images/users/id/' . $owner->user_id . '/uploads/licenses/'. $file_name;
+            }
+        }
 
         $user->attachRole($role_r);
 
