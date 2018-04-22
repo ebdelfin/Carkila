@@ -33,7 +33,7 @@
 
                         
                         <a class="d-flex logo no-underline" href="{{ url('/') }}">
-                            <h1 class="logo-text">Pondo</h1>
+                            <h1 class="logo-text">Carkila</h1>
                             
                         </a>
                         <small class="text">LOG IN</small>
