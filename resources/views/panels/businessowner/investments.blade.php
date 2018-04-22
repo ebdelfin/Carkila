@@ -29,8 +29,8 @@
                                         <td>
                                             {{--<a href="{{ route('posts.gallery.index', ['post' => $vehicle]) }}" class="btn btn-default">Gallery</a>--}}
                                             <a href=" {{ route('vehicles.show', ['post' => $vehicle]) }} " class="btn btn-twitter">View</a>
-                                            <a href="/posts/{{$vehicle->id}}/edit" class="btn btn-success">Edit</a>
-                                            {!!Form::open(['action' => ['PostsController@destroy', $vehicle->id], 'method' => 'POST', 'style' => 'display: inline-block;'])!!}
+                                            <a href="/vehicles/{{$vehicle->id}}/edit" class="btn btn-success">Edit</a>
+                                            {!!Form::open(['action' => ['VehicleController@destroy', $vehicle->id], 'method' => 'POST', 'style' => 'display: inline-block;'])!!}
                                             {{Form::hidden('_method', 'DELETE')}}
                                             {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                                             <a href="{{ route('booking.show', ['vehicle_id' => $vehicle->id]) }}" class="btn btn-default">Bookings</a>
