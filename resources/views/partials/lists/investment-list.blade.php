@@ -36,7 +36,7 @@
 
                 </div>
             @empty
-                <p>No investment.</p>
+                <p>No vehicles.</p>
             @endforelse
 
 </div>
