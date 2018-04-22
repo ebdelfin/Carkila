@@ -103,8 +103,8 @@ class VehicleController extends Controller
     public function show($id)
     {
         $vehicle = Vehicle::find($id);
-        $address = DB::table('users')->select('address')->where('id','=',(DB::table('vehicles')->select('user_id')->where('id','=',$id))->implode('user_id'))->get()->implode('address');
-        return view('pages.vehicleowner.vehicle.show')->with('vehicle',$vehicle)->with('address',$address);
+    /*    $address = DB::table('users')->select('address')->where('id','=',(DB::table('vehicles')->select('user_id')->where('id','=',$id))->implode('user_id'))->get()->implode('address');
+        return view('pages.vehicleowner.vehicle.show')->with('vehicle',$vehicle)->with('address',$address);*/
     }
 
     /**
@@ -198,7 +198,7 @@ class VehicleController extends Controller
             return redirect()->route('home')->with('error', 'Unauthorized Page');
         }
         $post->delete();
-        return redirect()->route('home')->with('success', 'Post Removed');
+        return redirect()->route('home')->with('success', 'Vehicle Removed');
     }
 
     public function galleryIndex(Post $post) {
@@ -252,4 +252,13 @@ class VehicleController extends Controller
 
         return back();
     }
+
+    public function search(Request $request) {
+        $search = $request->input('search');
+
+        $posts = Vehicle::orderBy('created_at', 'desc')->where('make', 'LIKE', '%'.$search.'%')->orWhere('model', 'LIKE', '%'.$search.'%')->paginate(6);
+
+        return view('index')->with('posts', $posts);
+    }
+
 }
