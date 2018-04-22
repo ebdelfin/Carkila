@@ -11,7 +11,11 @@ use App\Traits\CaptureIpTrait;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Validator;
 use jeremykenedy\LaravelRoles\Models\Role;
-
+use Image;
+use File;
+use Auth;
+use Mail;
+use Input;
 //RegistersUsers trait
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
@@ -120,7 +124,6 @@ class RegisterController extends Controller
                     'email'                 => 'required|email|max:255|unique:users',
                     'password'              => 'required|min:6|max:20|confirmed',
                     'password_confirmation' => 'required|same:password',
-                    'image'                 => 'required|image',
                 ],
                 [
                     'name.unique'                   => trans('auth.userNameTaken'),
@@ -194,8 +197,8 @@ class RegisterController extends Controller
                 'last_name'         => $data['last_name'],
                 'email'             => $data['email'],
      /*           'gender'             => $data['gender'],*/
-                'street'            => 'required',
-                'barangay'          => 'required',
+                'street'            => $data['street'],
+                'barangay'          => $data['barangay'],
                 'mobile_number'     => $data['mobile_number'],
                 'city'              => $data['city'],
     /*            'birth_date'        => $data['birth_date'],*/
@@ -205,30 +208,31 @@ class RegisterController extends Controller
                 'activated'         => !config('settings.activation'),
             ]);
 
+        $image  = Input::file('featured_image');
+        $file_name =  time() ;
+        $location = public_path() . '/images/users/id/' .  $user->id . '/uploads/licenses/';
+
+        // Make the user a folder and set permissions
+
+        if (!file_exists($location)) {
+            mkdir($location, 666, true);
+        }
+
+
+        Image::make($data['featured_image'])->save($location.$file_name.'.jpeg');
+
+        $owner_image = '/images/users/id/' .$user->id . '/uploads/licenses/'. $file_name;
+
         if ($role_r->slug == "vehicle.owner") {
             $owner = Owner::create([
                 'license_number'                  => $data['license_number'],
                 'license_expiry'                  => $data['license_expiry'],
-                'image'                           => $data['featured_image'],
+                'image'                           => $owner_image ,
                 'user_id'                         => $user->id,
             ]);
-            if ($request->hasFile('featured_image')) {
-                $image  = $request->file('featured_image');
-                $file_name =  time() . '.' . $image->getClientOriginalExtension();
-                $location = public_path() . '/images/users/id/' . $owner->user_id . '/uploads/licenses/';
 
-                // Make the user a folder and set permissions
-
-                if (!file_exists($location)) {
-                    mkdir($location, 666, true);
-                }
-
-
-                Image::make($image)->save($location.$file_name);
-
-                $owner->image = '/images/users/id/' . $owner->user_id . '/uploads/licenses/'. $file_name;
             }
-        }
+
 
         $user->attachRole($role_r);
 
