@@ -1,5 +1,7 @@
 <div class="form-group row">
-    <div class="col-xs-3">
+    <div class="col-xs-2">
+    </div>
+    <div class="col-xs-5">
         <form action="{{ route('search_initial') }}" method="POST" class="d-flex search-form">
             {{ csrf_field() }}
             <div class="input-group" id="adv-search">
@@ -15,7 +17,7 @@
 
 
     </div>
-    <div class="col-xs-2">
+    <div class="col-xs-3">
 
 
         <div class="dropdown dropdown-lg">
@@ -65,7 +67,7 @@
         </div>
 
     </div>
-    <div class="col-xs-7">
+    <div class="col-xs-2">
     </div>
 </div>
 
