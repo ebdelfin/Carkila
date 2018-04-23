@@ -32,30 +32,35 @@
         <div class="panel-heading">
 
 
-            <div class="d-flex" style="height: 500px;">
-
-                <a href="{{ $vehicle->image }}" data-lightbox="featured-image" style="width: 70%">
-                    <div id="post-featured-image" data-src="{{ $vehicle->image }}"   style="width: 70%;
-                            height: 500px;
-                            background-image: url({{ $vehicle->image }});
-                            background-size: contain;
-                            background-repeat: no-repeat;
-                            background-position: center;">
-
-                    </div>
-                </a>
 
 
+
+                <div class="d-flex" style="height: 500px;">
+                                      <a href="{{ $vehicle->image }}" data-lightbox="featured-image" style="width: 110%">
+                        <div id="post-featured-image" data-src="{{ $vehicle->image }}"   style="width: 100%;
+                                height: 500px;
+                                background-image: url({{ $vehicle->image }});
+                                background-size: contain;
+                                background-repeat: no-repeat;
+                                background-position: center;">
+
+                        </div>
+                    </a>
             </div>
+
+        <center>
             <div class="panel-body">
                 <h3>{{$vehicle->make}} {{$vehicle->model}} {{$vehicle->year}}</h3>
-                <h3>Capacity: {{$vehicle->seating_capacity}}</h3>
-                <h1>Rental Rate: {{$vehicle->rental_rate}}</h1>
-                 {{--<h3>Address: {{$address}}</h3>  --}}
-                <h3>Owner: <a href="{{ url('profile/'. DB::table('users')->select('first_name')->where('id',$vehicle->user_id)->implode('first_name')) }}"> {{DB::table('users')->select('first_name')->where('id',$vehicle->user_id)->implode('first_name')}}
+                <h4>₱{{$vehicle->rental_rate}}</h4>
+
+                <h4>Capacity: {{$vehicle->seating_capacity}}</h4>
+                {{--<h3>Address: {{$address}}</h3>  --}}
+                <h5>Owner: <a href="{{ url('profile/'. DB::table('users')->select('first_name')->where('id',$vehicle->user_id)->implode('first_name')) }}"> {{DB::table('users')->select('first_name')->where('id',$vehicle->user_id)->implode('first_name')}}
                         {{DB::table('users')->select('last_name')->where('id',$vehicle->user_id)->implode('last_name')}}
 
-                    </a></h3>
+                    </a></h5>
+
+        </center>
 
 
 

@@ -52,6 +52,7 @@ class VehicleController extends Controller
             'make' => 'required',
             'model' => 'required',
             'year' => 'required',
+            'type' => 'required',
             'color' => 'required',
             'seating_capacity' => 'required|numeric',
             'engine_number'=> 'required',
@@ -64,12 +65,14 @@ class VehicleController extends Controller
         $vehicle->make = $request->input('make');
         $vehicle->model = $request->input('model');
         $vehicle->year = $request->input('year');
+        $vehicle->type = $request->input('type');
         $vehicle->color = $request->input('color');
         $vehicle->seating_capacity = $request->input('seating_capacity');
         $vehicle->engine_number = $request->input('engine_number');
         $vehicle->chassis_number = $request->input('chassis_number');
         $vehicle->plate_number = $request->input('plate_number');
         $vehicle->rental_rate = $request->input('rental_rate');
+        $vehicle->notes = $request->input('notes');
         $vehicle->user_id = auth()->user()->id;
 
         if ($request->hasFile('featured_image')) {
@@ -103,8 +106,8 @@ class VehicleController extends Controller
     public function show($id)
     {
         $vehicle = Vehicle::find($id);
-    /*    $address = DB::table('users')->select('address')->where('id','=',(DB::table('vehicles')->select('user_id')->where('id','=',$id))->implode('user_id'))->get()->implode('address');
-        return view('pages.vehicleowner.vehicle.show')->with('vehicle',$vehicle)->with('address',$address);*/
+        /*$address = DB::table('users')->select('address')->where('id','=',(DB::table('vehicles')->select('user_id')->where('id','=',$id))->implode('user_id'))->get()->implode('address');*/
+        return view('pages.vehicleowner.vehicle.show')->with('vehicle',$vehicle);
     }
 
     /**
@@ -134,6 +137,7 @@ class VehicleController extends Controller
             'make' => 'required',
             'model' => 'required',
             'year' => 'required',
+            'type' => 'required',
             'color' => 'required',
             'seating_capacity' => 'required|numeric',
             'engine_number'=> 'required',
@@ -146,12 +150,14 @@ class VehicleController extends Controller
         $vehicle->make = $request->input('make');
         $vehicle->model = $request->input('model');
         $vehicle->year = $request->input('year');
+        $vehicle->type = $request->input('type');
         $vehicle->color = $request->input('color');
         $vehicle->seating_capacity = $request->input('seating_capacity');
         $vehicle->engine_number = $request->input('engine_number');
         $vehicle->chassis_number = $request->input('chassis_number');
         $vehicle->plate_number = $request->input('plate_number');
         $vehicle->rental_rate = $request->input('rental_rate');
+        $vehicle->notes = $request->input('notes');
 
         if ($request->featured_image) {
             // add new featured image

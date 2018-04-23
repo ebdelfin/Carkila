@@ -14,12 +14,14 @@ class Vehicle extends Model
         'make',
         'model',
         'year',
+        'type',
         'color',
         'seating_capacity',
         'engine_number',
         'chassis_number',
         'plate_number',
-        'rental_rate'
+        'rental_rate',
+        'notes'
     ];
 
 
