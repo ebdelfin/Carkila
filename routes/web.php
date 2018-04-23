@@ -145,6 +145,7 @@ Route::delete('/comments/{comment}', 'CommentController@destroy')->name('comment
 Route::resource('vehicle','VehicleController');
 
 Route::post('/search', 'VehicleController@search')->name('search');
+Route::post('/search_initial', 'VehicleController@search_initial')->name('search_initial');
 
 // PostController
 Route::resource('posts', 'PostsController');

@@ -17,7 +17,7 @@ class WelcomeController extends Controller
     {
     	$posts =  Vehicle::orderBy('created_at', 'desc')->paginate(6);
         //$vehicle = Vehicle::find($id);
-        $address = DB::table('users')->select('city')->where('id', '=', (DB::table('vehicles')->select('user_id')->where('id', '=', 1))->implode('user_id'))->get()->implode('city');
+        //$address = DB::table('users')->select('city')->where('id', '=', (DB::table('vehicles')->select('user_id')->where('id', '=', 1))->implode('user_id'))->get()->implode('city');
         //$collection->push([$post->id,$address]);
         //$phone = User::where('id','1')->with('id')->get();
         $collection = collect([]);
