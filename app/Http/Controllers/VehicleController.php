@@ -260,10 +260,24 @@ class VehicleController extends Controller
     }
 
     public function search(Request $request) {
-        $search = $request->input('search');
+        $title = $request->input('title');
+        $make =  $request->input('make');
+        $model =  $request->input('model');
+        $type =  $request->input('type');
+        $city =  $request->input('city');
+        $min =  $request->input('max');
+        $max =  $request->input('min');
 
-        $posts = Vehicle::orderBy('created_at', 'desc')->where('make', 'LIKE', '%'.$search.'%')->orWhere('model', 'LIKE', '%'.$search.'%')->paginate(6);
+        $posts = Vehicle::orderBy('created_at', 'desc')
+            ->where('make', 'LIKE', '%'.$title.'%')
+            ->orWhere('model', 'LIKE', '%'.$title.'%')
+            ->orWhere('make', 'LIKE', '%'.$make.'%')
+            ->orWhere('model', 'LIKE', '%'.$model.'%')
+            ->orWhere('type', 'LIKE', '%'.$type.'%')
+            ->orWhere('city', 'LIKE', '%'.$city.'%')
+            ->paginate(6);
 
+        return $make;
         return view('index')->with('posts', $posts);
     }
 

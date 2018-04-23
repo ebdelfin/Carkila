@@ -17,11 +17,14 @@
 
             </a>
 
-            <form action="{{ route('search') }}" method="POST" class="d-flex search-form">
+            <?php /*<form action="{{ route('search') }}" method="POST" class="d-flex search-form">
                 {{ csrf_field() }}
                 <input type="text" name="search" placeholder="Search">
                 <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
             </form>
+            */?>
+
+
 
 
 
@@ -99,5 +102,64 @@
                 @endif
             </ul>
         </div>
-    </div>
+        </div>
+
+    <form class="form-horizontal" action="{{ route('search') }}" method="POST">
+
+        {{ csrf_field() }}
+            <div class="input-group" id="adv-search" action="{{ route('search') }}" method="POST">
+                <input name="title" type="text"  class="form-control" placeholder="Search Vehicles (Make,Model)" />
+
+                <div class="input-group-btn">
+                    <div class="btn-group" role="group">
+                        <div class="dropdown dropdown-lg">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+
+                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+
+                                <form class="form-horizontal" action="{{ route('search') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <div class="form-group">
+                                        <label for="contain">Make</label>
+                                        <input name="make" class="form-control" type="text" placeholder="Ex., Toyota, Mitsubishi, Honda"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contain">Model</label>
+                                        <input name="model" class="form-control" type="text" placeholder="Ex., Vios, Mirage, Civic"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contain">Type</label>
+                                        {!! Form::select('type', ['Sedan' => 'Sedan', 'Van' => 'Van', 'SUV' => 'SUV'], null, ['class' => 'form-control','placeholder' => 'Select Vehicle Type']); !!}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contain">City</label>
+                                        {!! Form::select('city', ['Others' => 'Others', 'Caloocan City' => 'Caloocan', 'Las Pinas City' => 'Las Piñas', 'Makati City' => 'Makati', 'Malabon City' => 'Malabon', 'Mandaluyong City' => 'Mandaluyong',
+                                        'Manila City' => 'Manila', 'Marikina City' => 'Marikina', 'Muntinlupa City' => 'Muntinlupa', 'Navotas City' => 'Navotas', 'Paranaque City' => 'Parañaque', 'Pasay City' => 'Pasay', 'Pasig City' => 'Pasig', 'Pateros City' => 'Pateros',
+                                        'Quezon City' => 'Quezon City', 'San Juan City' => 'San Juan', 'Taguig City' => 'Taguig', 'Valenzuela City' => 'Valenzuela'], null, ['class' => 'form-control','placeholder' => 'Select City']); !!}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contain">Price Range</label>
+                                        <div class="form-group row">
+                                            <div class="col-xs-5">
+                                                <label for="ex1">Min</label>
+                                                <input name="Min" class="form-control" id="ex1" type="text">
+                                            </div>
+                                            <div class="col-xs-5">
+                                                <label for="ex2">Max</label>
+                                                <input name="Max" class="form-control" id="ex2" type="text">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        </div>
+                    </div>
+                </div>
+    </form>
+
 </nav>
