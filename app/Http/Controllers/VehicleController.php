@@ -274,23 +274,31 @@ class VehicleController extends Controller
         if (is_null($max)) {
            $max = 999999999999999;
         }
-        if (is_null($city)) {
-            $city = "";
-        }
 
         $search_vehicles = Vehicle::orderBy('created_at', 'desc')->orwhere('make', 'LIKE', '%'.$search.'%')->orwhere('model', 'LIKE', '%'.$search.'%')->paginate(6);
 
 
+        if (is_null($city)) {
+            $posts = Vehicle::orderBy('created_at', 'desc')
+                ->where('make', 'LIKE', '%'.$make.'%')
+                ->where('model', 'LIKE', '%'.$model.'%')
+                ->where('type', 'LIKE', '%'.$type.'%')
+                ->whereBetween('rental_rate', [$min, $max])
 
-        $posts = Vehicle::orderBy('created_at', 'desc')
-            ->where('make', 'LIKE', '%'.$make.'%')
-            ->where('model', 'LIKE', '%'.$model.'%')
-            ->where('type', 'LIKE', '%'.$type.'%')
-            ->whereBetween('rental_rate', [$min, $max])
-            ->where('user_id', '=', DB::table('users')->select('id')->where('city',$city)->implode('id'))
+
+                ->paginate(6);
+        }else{
+            $posts = Vehicle::orderBy('created_at', 'desc')
+                ->where('make', 'LIKE', '%'.$make.'%')
+                ->where('model', 'LIKE', '%'.$model.'%')
+                ->where('type', 'LIKE', '%'.$type.'%')
+                ->whereBetween('rental_rate', [$min, $max])
+                ->where('user_id', '=', DB::table('users')->select('id')->where('city',$city)->implode('id'))
 
 
-            ->paginate(6);
+                ->paginate(6);
+        }
+
         //return var_dump($city);
         //return var_dump(DB::table('users')->select('id')->where('city',$city)->implode('id'));
         return view('index')->with('posts', $posts,'search_vehicles',$search_vehicles);
