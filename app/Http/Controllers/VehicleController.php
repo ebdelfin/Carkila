@@ -265,8 +265,18 @@ class VehicleController extends Controller
         $model =  $request->input('model');
         $type =  $request->input('type');
         $city =  $request->input('city');
-        $min =  $request->input('max');
-        $max =  $request->input('min');
+        $min =  $request->input('min');
+        $max =  $request->input('max');
+
+        if (is_null($min)){
+            $min = 0;
+        }
+        if (is_null($max)) {
+           $max = 999999999999999;
+        }
+        if (is_null($city)) {
+            $city = "";
+        }
 
         $search_vehicles = Vehicle::orderBy('created_at', 'desc')->orwhere('make', 'LIKE', '%'.$search.'%')->orwhere('model', 'LIKE', '%'.$search.'%')->paginate(6);
 
@@ -276,9 +286,13 @@ class VehicleController extends Controller
             ->where('make', 'LIKE', '%'.$make.'%')
             ->where('model', 'LIKE', '%'.$model.'%')
             ->where('type', 'LIKE', '%'.$type.'%')
-            ->paginate(6);
+            ->whereBetween('rental_rate', [$min, $max])
+            ->where('user_id', '=', DB::table('users')->select('id')->where('city',$city)->implode('id'))
 
-        //return $make;
+
+            ->paginate(6);
+        //return var_dump($city);
+        //return var_dump(DB::table('users')->select('id')->where('city',$city)->implode('id'));
         return view('index')->with('posts', $posts,'search_vehicles',$search_vehicles);
     }
 

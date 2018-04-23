@@ -143,25 +143,23 @@
                                 {!! Form::select('type', ['Sedan' => 'Sedan', 'Van' => 'Van', 'SUV' => 'SUV'], null, ['class' => 'form-control','placeholder' => 'Select Vehicle Type']); !!}
                             </div>
 
-                            <?php /*
-                                        <div class="form-group">
-                                            <label for="contain">City</label>
-                                            {!! Form::select('city', ['Others' => 'Others', 'Caloocan City' => 'Caloocan', 'Las Pinas City' => 'Las Piñas', 'Makati City' => 'Makati', 'Malabon City' => 'Malabon', 'Mandaluyong City' => 'Mandaluyong',
-                                            'Manila City' => 'Manila', 'Marikina City' => 'Marikina', 'Muntinlupa City' => 'Muntinlupa', 'Navotas City' => 'Navotas', 'Paranaque City' => 'Parañaque', 'Pasay City' => 'Pasay', 'Pasig City' => 'Pasig', 'Pateros City' => 'Pateros',
-                                            'Quezon City' => 'Quezon City', 'San Juan City' => 'San Juan', 'Taguig City' => 'Taguig', 'Valenzuela City' => 'Valenzuela'], null, ['class' => 'form-control','placeholder' => 'Select City']); !!}
-                                        </div>
-                                         */?>
 
+                            <div class="form-group">
+                                <label for="contain">City</label>
+                                {!! Form::select('city', ['Others' => 'Others', 'Caloocan City' => 'Caloocan', 'Las Pinas City' => 'Las Piñas', 'Makati City' => 'Makati', 'Malabon City' => 'Malabon', 'Mandaluyong City' => 'Mandaluyong',
+                                'Manila City' => 'Manila', 'Marikina City' => 'Marikina', 'Muntinlupa City' => 'Muntinlupa', 'Navotas City' => 'Navotas', 'Paranaque City' => 'Parañaque', 'Pasay City' => 'Pasay', 'Pasig City' => 'Pasig', 'Pateros City' => 'Pateros',
+                                'Quezon City' => 'Quezon City', 'San Juan City' => 'San Juan', 'Taguig City' => 'Taguig', 'Valenzuela City' => 'Valenzuela'], null, ['class' => 'form-control','placeholder' => 'Select City']); !!}
+                            </div>
                             <div class="form-group">
                                 <label for="contain">Price Range</label>
                                 <div class="form-group row">
                                     <div class="col-xs-5">
                                         <label for="ex1">Min</label>
-                                        <input name="Min" class="form-control" id="ex1" type="text">
+                                        <input value = "" name="min" class="form-control" id="ex1" type="text">
                                     </div>
                                     <div class="col-xs-5">
                                         <label for="ex2">Max</label>
-                                        <input name="Max" class="form-control" id="ex2" type="text">
+                                        <input value = ""  name="max" class="form-control" id="ex2" type="text">
                                     </div>
 
                                 </div>
