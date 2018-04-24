@@ -19,7 +19,8 @@
 
         </div>
     </div>
-    <div class="container">
+    @if ( Auth::User()->hasRole('vehicle.owner'))
+        <div class="container">
         @if ($booking->status == "Pending")
             <div class="col-sm-6"><a href=" {{ route('booking.approve_request', ['booking' => $booking->id])}} " class="btn btn-success">Accept</a></div>
             <div class="col-sm-6"><a href=" {{ route('booking.decline_request', ['booking_id' => $booking->id])}} " class="btn btn-danger">Decline</a></div>
@@ -116,6 +117,7 @@
         @endif
 
     </div>
+    @endif
 
 
 
