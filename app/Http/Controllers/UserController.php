@@ -33,6 +33,7 @@ class UserController extends Controller
         $user = Auth::user();
 
         $posts =  Vehicle::orderBy('created_at', 'desc')->paginate(6);
+
         if ($user->isAdmin()) {
             return view('pages.admin.dashboard');
         } if ($user->hasRole('vehicle.owner')) {
