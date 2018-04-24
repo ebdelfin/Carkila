@@ -8,14 +8,17 @@
                     <div class="panel-body">
                     
                         @if(count($vehicles) > 0)
-                            <table class="table table-striped">
-                                <tr>
-                                    <th></th>
-                                    <th>ID</th>
-                                    <th>Make</th>
-                                    <th>Model</th>
-                                    <td></td>
-                                </tr>
+                            <table class="table table-striped" id="myTable2">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>ID</th>
+                                        <th>Make</th>
+                                        <th>Model</th>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                 @foreach($vehicles as $vehicle)
                                     <tr class="investment-table-row">
                                         <td style="width: 200px;">
@@ -39,6 +42,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                                </tbody>
                             </table>
 
                             <div class="text-center">

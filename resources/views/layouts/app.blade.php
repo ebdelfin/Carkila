@@ -33,6 +33,8 @@
         <link href="{{ asset('/css/gallery.css') }}" rel="stylesheet">
         <link href="{{ asset('/css/lightbox.css') }}" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" />
 
         @yield('template_linked_css')
 
@@ -100,5 +102,11 @@
             CKEDITOR.replace( 'article-ckeditor' );
         </script>
         <script src="{{ asset('js/share.js') }}"></script>
+        <script>$(document).ready(function() {
+                $('#myTable2').DataTable();
+            } );</script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     </body>
 </html>
