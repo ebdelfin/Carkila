@@ -283,18 +283,20 @@ class VehicleController extends Controller
                 ->where('make', 'LIKE', '%'.$make.'%')
                 ->where('model', 'LIKE', '%'.$model.'%')
                 ->where('type', 'LIKE', '%'.$type.'%')
-                ->whereBetween('rental_rate', [$min, $max]);
+                ->whereBetween('rental_rate', [$min, $max])
 
 
+                ->paginate(6);
         }else{
             $posts = Vehicle::orderBy('created_at', 'desc')
                 ->where('make', 'LIKE', '%'.$make.'%')
                 ->where('model', 'LIKE', '%'.$model.'%')
                 ->where('type', 'LIKE', '%'.$type.'%')
                 ->whereBetween('rental_rate', [$min, $max])
-                ->where('user_id', '=', DB::table('users')->select('id')->where('city',$city)->implode('id'));
+                ->where('user_id', '=', DB::table('users')->select('id')->where('city',$city)->implode('id'))
 
 
+                ->paginate(6);
         }
 
         //return var_dump($city);
