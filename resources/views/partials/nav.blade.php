@@ -55,7 +55,7 @@
                         <li><a href="{{ url('/dashboard') }}"><i class="fa fa-car"></i> Bookings</a></li>
                     @endif
 
-                    @if (Auth::User()->hasRole('vehicle.owner'))
+                    @if (Auth::User()->hasRole('vehicle.owner') || Auth::User()->hasRole('admin') )
                         <li><a href="{{ url('/dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
                     @endif
 

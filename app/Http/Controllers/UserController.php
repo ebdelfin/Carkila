@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
 use App\Models\Vehicle;
 use Auth;
 use App\Models\User;
@@ -51,6 +52,13 @@ class UserController extends Controller
         }
         
 
+    }
+
+    public function transaction_reports(){
+        $transaction = Booking::all();
+
+        //return var_dump($transaction);
+        return view('pages.admin.transaction_reports')->with('requests',$transaction);
     }
 
     public function myFavorites() { 

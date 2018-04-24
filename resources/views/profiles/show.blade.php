@@ -132,43 +132,44 @@
 					</div>
 
 				</div>
+				@if ($user->hasRole('renter')|| $user->hasRole('vehicle.owner'))
+					<div class="panel">
 
-				<div class="panel">
-
-					<div class="container">
-						<h6>User's average rating</h6>
-						<div class="rating" style="pointer-events: none;">
-							<input id="input-1" class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="{{ $rating }}" data-size="xs">
+						<div class="container">
+							<h6>User's average rating</h6>
+							<div class="rating" style="pointer-events: none;">
+								<input id="input-1" class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="{{ $rating }}" data-size="xs">
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="panel">
-					<div class="container">
-						<h5>Comments</h5>
-						<hr>
+					<div class="panel">
+						<div class="container">
+							<h5>Comments</h5>
+							<hr>
 
-						<div class="comments">
-							@foreach ($comments as $comment)
-								<div class="comment"><div class="comment-avatar"><img src="{{ $comment->user->profile->avatar }}"></div>
-									<div class="comment-box">
-										<blockquote class="blockquote">
-											<p class="mb-0">{{ $comment->body }}</p>
-											<footer class="blockquote-footer">{{$comment->user->name}}</footer>
-										</blockquote>
+							<div class="comments">
+								@foreach ($comments as $comment)
+									<div class="comment"><div class="comment-avatar"><img src="{{ $comment->user->profile->avatar }}"></div>
+										<div class="comment-box">
+											<blockquote class="blockquote">
+												<p class="mb-0">{{ $comment->body }}</p>
+												<footer class="blockquote-footer">{{$comment->user->name}}</footer>
+											</blockquote>
 
+										</div>
 									</div>
-								</div>
-							@endforeach
+								@endforeach
 
+							</div>
 						</div>
 					</div>
-				</div>
 			</div>
-			</div>
+		</div>
+				@endif
+
 
 		</div>
 
-	</div>
 
 
 @endsection

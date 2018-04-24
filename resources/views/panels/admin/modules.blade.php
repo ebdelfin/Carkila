@@ -60,5 +60,12 @@
 				<h3>Active Users</h3>
 			</a>
 		</div>
+	</div><div class="col-md-4">
+		<div class="col-content text-center border-shadow p-1 module">
+			<a href={{ route('transaction_reports') }} class="no-underline">
+				<h1 class="text-large"><i class="fa fa-book" aria-hidden="true"></i></h1>
+				<h3>Transaction Reports</h3>
+			</a>
+		</div>
 	</div>
 </div>

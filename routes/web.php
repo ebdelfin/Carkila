@@ -147,6 +147,9 @@ Route::resource('vehicle','VehicleController');
 Route::post('/search', 'VehicleController@search')->name('search');
 Route::post('/search_initial', 'VehicleController@search_initial')->name('search_initial');
 
+//admin_reports
+Route::get('/transaction_reports', 'UserController@transaction_reports')->name('transaction_reports');
+
 // PostController
 Route::resource('posts', 'PostsController');
 Route::post('/posts/rate', 'PostsController@rate')->name('rate.post');
