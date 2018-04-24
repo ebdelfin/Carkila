@@ -55,9 +55,9 @@ class UserController extends Controller
     }
 
     public function transaction_reports(){
-        $transaction = Booking::all();
+        $transaction = Transaction::all();
 
-        //return var_dump($transaction);
+        return var_dump($transaction);
         return view('pages.admin.transaction_reports')->with('requests',$transaction);
     }
 
