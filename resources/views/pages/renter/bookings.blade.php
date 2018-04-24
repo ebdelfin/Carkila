@@ -35,7 +35,8 @@
                         <td>{{$booking->start_date_time}}</td>
                         <td>{{$booking->end_date_time}}</td>
                         <td>{{DB::table('vehicles')->select('model')->where('id',$booking->vehicle_id)->implode('model')}}</td>
-                        <td><a href="{{ url('profile/'. DB::table('users')->select('name')->where('id',$booking->owner_id)->implode('name')) }}"> {{DB::table('users')->select('name')->where('id',$booking->owner_id)->implode('name')}}</a></td>
+                        <td><a href="{{ url('profile/'. DB::table('users')->select('first_name')->where('id',$booking->owner_id)->implode('first_name')) }}">
+                                {{DB::table('users')->select('last_name')->where('id',$booking->owner_id)->implode('last_name')}}</a></td>
                         <td>{{$booking->status}}</td>
 
                     </tr>

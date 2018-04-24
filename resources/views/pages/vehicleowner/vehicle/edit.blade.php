@@ -105,6 +105,16 @@
                         @endif
                     </div>
 
+                    <div class="form-group">
+                        {{Form::label('notes', 'Notes')}}
+                        {{Form::textarea('notes', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Notes'])}}
+                        @if ($errors->has('notes'))
+                            <span class="text-danger">
+                        <strong>{{ $errors->first('notes') }}</strong>
+                    </span>
+                        @endif
+                    </div>
+
                     {{ Form::label('featured_image' , 'Update Featured Image:') }}
                     {{ Form::file('featured_image') }}
 

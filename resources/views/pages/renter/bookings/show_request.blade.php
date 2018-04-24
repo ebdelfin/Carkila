@@ -12,8 +12,14 @@
     <h3>{{$booking->status}}</h3>
     <div class="panel panel-default p-1">
         <div class="well">
-           {{$booking->destination}}
-            <p>Renter: <a href="{{ url('profile/'. DB::table('users')->select('name')->where('id',$booking->user_id)->implode('name')) }}"> {{DB::table('users')->select('name')->where('id',$booking->user_id)->implode('name')}}</a></p>
+            <h5>Destination: {{$booking->destination}}</h5>
+            <h5>Pick-up Location: {{$booking->pickup_location}}</h5>
+            <h5>Start Date-Time: {{$booking->start_date_time}}</h5>
+            <h5>End Date-Time: {{$booking->end_date_time}}</h5>
+            <h5>Number of Passengers: {{$booking->pax}}</h5>
+
+               <p>Renter: <a href="{{ url('profile/'. DB::table('users')->select('first_name')->where('id',$booking->owner_id)->implode('first_name')) }}">
+                       {{DB::table('users')->select('last_name')->where('id',$booking->owner_id)->implode('last_name')}}</a></p>
             {{-- Add mo yung ibang info like $booking->pickup_location, $booking->start_date_time etc.--}}
 
 

@@ -112,9 +112,14 @@
                     </div>
 
                 </div>
+
             @empty
                 <p>No vehicles.</p>
             @endforelse
 
 </div>
 
+
+<div class="text-center">
+    {!! $posts->links() !!}
+</div>

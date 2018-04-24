@@ -137,12 +137,8 @@ class VehicleController extends Controller
             'make' => 'required',
             'model' => 'required',
             'year' => 'required',
-            'type' => 'required',
             'color' => 'required',
             'seating_capacity' => 'required|numeric',
-            'engine_number'=> 'required',
-            'chassis_number'=> 'required',
-            'plate_number'=> 'required',
             'rental_rate' => 'required|numeric',
         ]);
 
@@ -150,12 +146,8 @@ class VehicleController extends Controller
         $vehicle->make = $request->input('make');
         $vehicle->model = $request->input('model');
         $vehicle->year = $request->input('year');
-        $vehicle->type = $request->input('type');
         $vehicle->color = $request->input('color');
         $vehicle->seating_capacity = $request->input('seating_capacity');
-        $vehicle->engine_number = $request->input('engine_number');
-        $vehicle->chassis_number = $request->input('chassis_number');
-        $vehicle->plate_number = $request->input('plate_number');
         $vehicle->rental_rate = $request->input('rental_rate');
         $vehicle->notes = $request->input('notes');
 
@@ -284,7 +276,6 @@ class VehicleController extends Controller
                 ->where('model', 'LIKE', '%'.$model.'%')
                 ->where('type', 'LIKE', '%'.$type.'%')
                 ->whereBetween('rental_rate', [$min, $max])
-
 
                 ->paginate(6);
         }else{
