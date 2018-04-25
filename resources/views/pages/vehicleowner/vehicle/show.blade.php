@@ -52,8 +52,8 @@
             <div class="panel-body">
                 <h3>{{$vehicle->make}} {{$vehicle->model}} {{$vehicle->year}}</h3>
                 <h4>₱{{$vehicle->rental_rate}}</h4>
-
                 <h4>Capacity: {{$vehicle->seating_capacity}}</h4>
+                <h4>Notes: {{$vehicle->notes}}</h4>
                 {{--<h3>Address: {{$address}}</h3>  --}}
                 <h5>Owner: <a href="{{ url('profile/'. DB::table('users')->select('name')->where('id',$vehicle->user_id)->implode('name')) }}"> {{DB::table('users')->select('first_name')->where('id',$vehicle->user_id)->implode('first_name')}}
                         {{DB::table('users')->select('last_name')->where('id',$vehicle->user_id)->implode('last_name')}}
